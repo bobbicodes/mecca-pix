@@ -7,7 +7,7 @@
 
 (defn mecca []
   [:div
-   [:h1 "Import MIDI file"]
+   [:h1 "Import image file"]
    [:p]
    [:div
     [:input#input
@@ -17,19 +17,14 @@
         (let [dom  (o/get event "target")
               file (o/getValueByKeys dom #js ["files" 0])
               reader (js/FileReader.)]
-          (.readAsArrayBuffer reader file)
+          (.readAsDataURL reader file)
           (set! (.-onload reader)
                 (fn [e]
-                  (dispatch [:file-upload 
-                             (-> e .-target .-result
-                                 (js/Uint8Array.)
-                                 crypt/byteArrayToHex)
-                             ])))))}]]
+                  (dispatch [:file-upload
+                             (-> e .-target .-result)])))))}]]
    (let [file (subscribe [:file-upload])]
      [:div
-      [:h2 "Hex dump:"]
+      [:h2 "Base64 URL:"]
       [:p (str @file)]
-      [:h2 "Header:"]
-      [:p (apply str (take 8 @file))]
       (if (= (apply str (take 8 @file)) "4d546864")
         [:h3.green "Valid MIDI file :)"])])])

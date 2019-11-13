@@ -1,4 +1,2 @@
-# mecca-midi
-Clojure library for importing and manipulating MIDI files
-
-Companion [notebook](https://nextjournal.com/btowers/midi-parser) on Nextjournal
+# mecca-pix
+Re-frame app for importing and manipulating images
