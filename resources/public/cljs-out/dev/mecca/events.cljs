@@ -1,10 +1,6 @@
 (ns ^:figwheel-hooks mecca.events
   (:require
-   [re-frame.core :refer [reg-event-db reg-event-fx dispatch subscribe]]
-   [re-pressed.core :as rp]
-   [day8.re-frame.undo :as undo :refer [undoable]]
-   [goog.events :refer [listen unlisten]])
-  (:import [goog.events EventType]))
+   [re-frame.core :refer [reg-event-db]]))
 
 (reg-event-db
  :initialize-db

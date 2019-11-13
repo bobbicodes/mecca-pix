@@ -1,6 +1,5 @@
 (ns ^:figwheel-hooks mecca.core
   (:require
-   [cljs.core.async :refer [<! timeout chan put! close!]]
    [goog.dom :as gdom]
    [reagent.core :as r]
    [re-frame.core :as rf]
@@ -8,19 +7,9 @@
    [day8.re-frame.http-fx]
    [mecca.events]
    [mecca.subs]
-   [mecca.view :as view])
-  (:require-macros
-   [cljs.core.async.macros :refer [go go-loop]]))
+   [mecca.view :as view]))
 
 (rf/dispatch-sync [:initialize-db])
-
-(rf/dispatch-sync [::rp/add-keyboard-event-listener "keydown"])
-
-(rf/dispatch
- [::rp/set-keydown-rules
-  {:event-keys [[[:jump!]
-                 [{:keyCode 13}]
-                 [{:keyCode 32}]]]}])
 
 (defn get-app-element []
   (gdom/getElement "app"))

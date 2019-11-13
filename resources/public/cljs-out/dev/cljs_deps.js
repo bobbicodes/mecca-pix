@@ -63,17 +63,9 @@ goog.addDependency("../re_frame/subs.js", ['re_frame.subs'], ['re_frame.interop'
 goog.addDependency("../re_frame/core.js", ['re_frame.core'], ['re_frame.interop', 're_frame.interceptor', 're_frame.events', 're_frame.fx', 're_frame.registrar', 'cljs.core', 're_frame.router', 'clojure.set', 're_frame.std_interceptors', 're_frame.loggers', 're_frame.subs', 're_frame.cofx', 're_frame.db']);
 goog.addDependency("../re_pressed/impl.js", ['re_pressed.impl'], ['cljs.core', 'goog.events', 're_frame.core']);
 goog.addDependency("../re_pressed/core.js", ['re_pressed.core'], ['cljs.core', 're_pressed.impl', 're_frame.core']);
-goog.addDependency("../day8/re_frame/undo.js", ['day8.re_frame.undo'], ['reagent.core', 'cljs.core', 're_frame.db', 're_frame.core']);
-goog.addDependency("../mecca/events.js", ['mecca.events'], ['day8.re_frame.undo', 're_pressed.core', 'cljs.core', 'goog.events.EventType', 'goog.events', 're_frame.core']);
+goog.addDependency("../mecca/events.js", ['mecca.events'], ['cljs.core', 're_frame.core']);
 goog.addDependency("../mecca/subs.js", ['mecca.subs'], ['cljs.core', 're_frame.core']);
-goog.addDependency("../cljs/core/async/impl/protocols.js", ['cljs.core.async.impl.protocols'], ['cljs.core']);
-goog.addDependency("../cljs/core/async/impl/buffers.js", ['cljs.core.async.impl.buffers'], ['cljs.core', 'cljs.core.async.impl.protocols']);
-goog.addDependency("../cljs/core/async/impl/dispatch.js", ['cljs.core.async.impl.dispatch'], ['cljs.core', 'cljs.core.async.impl.buffers', 'goog.async.nextTick']);
-goog.addDependency("../cljs/core/async/impl/channels.js", ['cljs.core.async.impl.channels'], ['cljs.core.async.impl.dispatch', 'cljs.core', 'cljs.core.async.impl.buffers', 'cljs.core.async.impl.protocols']);
-goog.addDependency("../cljs/core/async/impl/ioc_helpers.js", ['cljs.core.async.impl.ioc_helpers'], ['cljs.core', 'cljs.core.async.impl.protocols']);
-goog.addDependency("../cljs/core/async/impl/timers.js", ['cljs.core.async.impl.timers'], ['cljs.core.async.impl.channels', 'cljs.core.async.impl.dispatch', 'cljs.core', 'cljs.core.async.impl.protocols']);
-goog.addDependency("../cljs/core/async.js", ['cljs.core.async'], ['cljs.core.async.impl.channels', 'cljs.core.async.impl.dispatch', 'cljs.core', 'cljs.core.async.impl.buffers', 'cljs.core.async.impl.protocols', 'cljs.core.async.impl.ioc_helpers', 'goog.array', 'cljs.core.async.impl.timers']);
-goog.addDependency("../mecca/view.js", ['mecca.view'], ['goog.crypt', 'mecca.events', 'mecca.subs', 'cljs.core', 'goog.object', 're_frame.core']);
+goog.addDependency("../mecca/view.js", ['mecca.view'], ['cljs.core', 'goog.object', 're_frame.core']);
 goog.addDependency("../ajax/protocols.js", ['ajax.protocols'], ['cljs.core']);
 goog.addDependency("../ajax/util.js", ['ajax.util'], ['cljs.core', 'ajax.protocols']);
 goog.addDependency("../ajax/url.js", ['ajax.url'], ['cljs.core', 'ajax.util', 'clojure.string']);
@@ -99,7 +91,7 @@ goog.addDependency("../ajax/easy.js", ['ajax.easy'], ['ajax.formats', 'ajax.tran
 goog.addDependency("../ajax/xhrio.js", ['ajax.xhrio'], ['goog.net.XhrManager', 'goog.net.XhrIo', 'goog.json', 'goog.Uri', 'cljs.core', 'goog.net.EventType', 'ajax.protocols', 'goog.events', 'goog.net.ErrorCode']);
 goog.addDependency("../ajax/core.js", ['ajax.core'], ['ajax.formats', 'ajax.xml_http_request', 'ajax.transit', 'ajax.json', 'ajax.url', 'ajax.interceptors', 'cljs.core', 'ajax.ring', 'ajax.easy', 'ajax.simple', 'ajax.protocols', 'ajax.util', 'clojure.string', 'ajax.xhrio']);
 goog.addDependency("../day8/re_frame/http_fx.js", ['day8.re_frame.http_fx'], ['ajax.core', 'cljs.core', 'goog.net.ErrorCode', 're_frame.core']);
-goog.addDependency("../mecca/core.js", ['mecca.core'], ['goog.dom', 're_pressed.core', 'mecca.events', 'mecca.subs', 'reagent.core', 'cljs.core', 'cljs.core.async', 'mecca.view', 're_frame.core', 'day8.re_frame.http_fx']);
+goog.addDependency("../mecca/core.js", ['mecca.core'], ['goog.dom', 're_pressed.core', 'mecca.events', 'mecca.subs', 'reagent.core', 'cljs.core', 'mecca.view', 're_frame.core', 'day8.re_frame.http_fx']);
 goog.addDependency("../cljs/test.js", ['cljs.test'], ['cljs.core', 'cljs.pprint', 'clojure.string']);
 goog.addDependency("../figwheel/main/async_result.js", ['figwheel.main.async_result'], ['cljs.core', 'figwheel.repl']);
 goog.addDependency("../figwheel/main/testing.js", ['figwheel.main.testing'], ['goog.dom', 'cljs.core', 'cljs.test', 'clojure.string', 'figwheel.main.async_result']);
