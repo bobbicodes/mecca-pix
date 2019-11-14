@@ -28,15 +28,7 @@
     (set! (.-width canvas) width) 
     (set! (.-height canvas) height) 
     (.drawImage ctx img 0 0) 
-    (.getImageData ctx 0 0 width height)))
-
-#_(defn convert
-  [img fileName]
-  (let [img-data   (img->data img)
-        ;converted (convertImage imgData)
-        ]
-    ;(showOutput converted fileName)
-    img-data))
+    (.-data (.getImageData ctx 0 0 width height))))
 
 (defn make-image
   [src callback]
@@ -72,5 +64,8 @@
           (set! (.-onload reader)
                 #(dispatch [:file-upload
                              (-> % .-target .-result)]))))}]]
-   (when @(subscribe [:img])
-     [img-el])])
+   (when-let [img @(subscribe [:img])]
+     [:div
+      [img-el]
+      [:p (str "Image data: " (img->data img))]
+      ])])

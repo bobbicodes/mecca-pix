@@ -42,7 +42,7 @@ canvas.height = height;
 
 ctx.drawImage(img,(0),(0));
 
-return ctx.getImageData((0),(0),width,height);
+return ctx.getImageData((0),(0),width,height).data;
 });
 mecca.view.make_image = (function mecca$view$make_image(src,callback){
 var img = (new Image());
@@ -79,7 +79,14 @@ var G__13793 = new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVe
 return (re_frame.core.dispatch.cljs$core$IFn$_invoke$arity$1 ? re_frame.core.dispatch.cljs$core$IFn$_invoke$arity$1(G__13793) : re_frame.core.dispatch.call(null,G__13793));
 });})(dom,file,reader))
 ;
-})], null)], null)], null),(cljs.core.truth_(cljs.core.deref((function (){var G__13794 = new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$img], null);
+})], null)], null)], null),(function (){var temp__5457__auto__ = cljs.core.deref((function (){var G__13794 = new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$img], null);
 return (re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1 ? re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1(G__13794) : re_frame.core.subscribe.call(null,G__13794));
-})()))?new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [mecca.view.img_el], null):null)], null);
+})());
+if(cljs.core.truth_(temp__5457__auto__)){
+var img = temp__5457__auto__;
+return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [mecca.view.img_el], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$p,["Image data: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(mecca.view.img__GT_data(img))].join('')], null)], null);
+} else {
+return null;
+}
+})()], null);
 });
