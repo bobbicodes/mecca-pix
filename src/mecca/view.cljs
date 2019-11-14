@@ -48,6 +48,22 @@
           [:p (str "Width: " (.-width @el))]
           [:p (str "Height: " (.-height @el))]]])))
 
+(defn get-colors [img]
+  (let [data (img->data img)
+        w (.-width img)]
+    (loop [n 0 colors {}]
+      (if (or (> n (.-length data))
+               (> 0 (aget data (+ n 3))))
+        colors
+        (recur (+ 4 n)
+               (update colors
+                       [(aget data n)
+                        (aget data (+ n 1))
+                        (aget data (+ n 2))
+                        (aget data (+ n 3))]
+                       #(conj % [(mod (/ n 4) w)
+                                  (.floor js/Math (/ (/ n 4) w))])))))))
+
 (defn mecca []
   [:div
    [:h1 "Import image file"]
@@ -67,5 +83,5 @@
    (when-let [img @(subscribe [:img])]
      [:div
       [img-el]
-      [:p (str "Image data: " (img->data img))]
+      [:p (str "Colors: " (get-colors img))]
       ])])
