@@ -44,35 +44,42 @@ ctx.drawImage(img,(0),(0));
 
 return ctx.getImageData((0),(0),width,height);
 });
-mecca.view.convert = (function mecca$view$convert(img,fileName){
-var img_data = mecca.view.img__GT_data(img);
-return img_data;
-});
 mecca.view.make_image = (function mecca$view$make_image(src,callback){
 var img = (new Image());
 img.onload = callback;
 
-return img.src = (cljs.core.truth_(src.target)?src.target.result:src);
+return img.src = src;
+});
+mecca.view.img_el = (function mecca$view$img_el(){
+var file = (function (){var G__13788 = new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$file_DASH_upload], null);
+return (re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1 ? re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1(G__13788) : re_frame.core.subscribe.call(null,G__13788));
+})();
+var el = (function (){var G__13789 = new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$img], null);
+return (re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1 ? re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1(G__13789) : re_frame.core.subscribe.call(null,G__13789));
+})();
+return ((function (file,el){
+return (function (){
+return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$img,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$src,cljs.core.deref(file)], null)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$p,["Base64:",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(file))].join('')], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$p,["Width: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(el).width)].join('')], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$p,["Height: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(el).height)].join('')], null)], null)], null);
+});
+;})(file,el))
 });
 mecca.view.mecca = (function mecca$view$mecca(){
 return new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$h1,"Import image file"], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$p], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$input_SHARP_input,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$type,"file",cljs.core.cst$kw$on_DASH_change,(function (event){
 var dom = goog.object.get(event,"target");
-var file = (function (){var G__13784 = dom;
-var G__13785 = ["files",(0)];
-return goog.object.getValueByKeys(G__13784,G__13785);
+var file = (function (){var G__13791 = dom;
+var G__13792 = ["files",(0)];
+return goog.object.getValueByKeys(G__13791,G__13792);
 })();
 var reader = (new FileReader());
 reader.readAsDataURL(file);
 
 return reader.onload = ((function (dom,file,reader){
-return (function (e){
-var G__13786 = new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$file_DASH_upload,e.target.result], null);
-return (re_frame.core.dispatch.cljs$core$IFn$_invoke$arity$1 ? re_frame.core.dispatch.cljs$core$IFn$_invoke$arity$1(G__13786) : re_frame.core.dispatch.call(null,G__13786));
+return (function (p1__13790_SHARP_){
+var G__13793 = new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$file_DASH_upload,p1__13790_SHARP_.target.result], null);
+return (re_frame.core.dispatch.cljs$core$IFn$_invoke$arity$1 ? re_frame.core.dispatch.cljs$core$IFn$_invoke$arity$1(G__13793) : re_frame.core.dispatch.call(null,G__13793));
 });})(dom,file,reader))
 ;
-})], null)], null)], null),(function (){var file = (function (){var G__13787 = new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$file_DASH_upload], null);
-return (re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1 ? re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1(G__13787) : re_frame.core.subscribe.call(null,G__13787));
-})();
-return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$h2,"Base64 URL:"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$p,[cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(file))].join('')], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$img,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$src,[cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.deref(file))].join('')], null)], null)], null);
-})()], null);
+})], null)], null)], null),(cljs.core.truth_(cljs.core.deref((function (){var G__13794 = new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$img], null);
+return (re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1 ? re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1(G__13794) : re_frame.core.subscribe.call(null,G__13794));
+})()))?new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [mecca.view.img_el], null):null)], null);
 });

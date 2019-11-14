@@ -277,7 +277,6 @@ cljs.core.cst$kw$cached_QMARK_ = new cljs.core.Keyword(null,"cached?","cached?",
 cljs.core.cst$kw$sub_SLASH_dispose = new cljs.core.Keyword("sub","dispose","sub/dispose",365440536);
 cljs.core.cst$kw$pause = new cljs.core.Keyword(null,"pause","pause",-2095325672);
 cljs.core.cst$kw$error = new cljs.core.Keyword(null,"error","error",-978969032);
-cljs.core.cst$kw$h2 = new cljs.core.Keyword(null,"h2","h2",-372662728);
 cljs.core.cst$kw$re_DASH_pressed$core_SLASH_keyup = new cljs.core.Keyword("re-pressed.core","keyup","re-pressed.core/keyup",-981006728);
 cljs.core.cst$kw$componentFunction = new cljs.core.Keyword(null,"componentFunction","componentFunction",825866104);
 cljs.core.cst$kw$exception = new cljs.core.Keyword(null,"exception","exception",-335277064);

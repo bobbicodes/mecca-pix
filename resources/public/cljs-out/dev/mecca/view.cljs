@@ -20,18 +20,17 @@
 
 (defn make-path [color data] (str "[\"" color "\" \"" data "\"]\n"))
 
-
 (defn img->data [img] 
   (let [canvas (.createElement js/document "canvas")
         ctx (.getContext canvas "2d")
-        width (.-width img) 
-        height (.-height img)] 
+        width (.-width img)
+        height (.-height img)]
     (set! (.-width canvas) width) 
     (set! (.-height canvas) height) 
     (.drawImage ctx img 0 0) 
     (.getImageData ctx 0 0 width height)))
 
-(defn convert
+#_(defn convert
   [img fileName]
   (let [img-data   (img->data img)
         ;converted (convertImage imgData)
@@ -43,7 +42,19 @@
   [src callback]
   (let [img (js/Image.)]
     (set! (.-onload img) callback)
-    (set! (.-src img) (if (.-target src) (.. src -target -result) src))))
+    (set! (.-src img) src)))
+
+
+(defn img-el []
+  (let [file (subscribe [:file-upload])
+        el (subscribe [:img])]
+    (fn []
+      [:div
+       [:img {:src @file}]
+       [:p (str "Base64:" @file)]
+         [:div
+          [:p (str "Width: " (.-width @el))]
+          [:p (str "Height: " (.-height @el))]]])))
 
 (defn mecca []
   [:div
@@ -59,11 +70,7 @@
               reader (js/FileReader.)]
           (.readAsDataURL reader file)
           (set! (.-onload reader)
-                (fn [e]
-                  (dispatch [:file-upload
-                             (-> e .-target .-result)])))))}]]
-   (let [file (subscribe [:file-upload])]
-     [:div
-      [:h2 "Base64 URL:"]
-      [:p (str @file)]
-      [:img {:src (str @file)}]])])
+                #(dispatch [:file-upload
+                             (-> % .-target .-result)]))))}]]
+   (when @(subscribe [:img])
+     [img-el])])
