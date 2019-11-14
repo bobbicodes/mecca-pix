@@ -320,6 +320,7 @@ cljs.core.cst$kw$on_DASH_change = new cljs.core.Keyword(null,"on-change","on-cha
 cljs.core.cst$kw$autobind = new cljs.core.Keyword(null,"autobind","autobind",-570650245);
 cljs.core.cst$sym$catch = new cljs.core.Symbol(null,"catch","catch",-1616370245,null);
 cljs.core.cst$kw$cofx = new cljs.core.Keyword(null,"cofx","cofx",2013202907);
+cljs.core.cst$kw$h3 = new cljs.core.Keyword(null,"h3","h3",2067611163);
 cljs.core.cst$kw$body = new cljs.core.Keyword(null,"body","body",-2049205669);
 cljs.core.cst$kw$connection_DASH_established = new cljs.core.Keyword(null,"connection-established","connection-established",-1403749733);
 cljs.core.cst$kw$alt_DASH_impl = new cljs.core.Keyword(null,"alt-impl","alt-impl",670969595);
