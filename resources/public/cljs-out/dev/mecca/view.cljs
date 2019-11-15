@@ -85,6 +85,10 @@
                            (-> % .-target .-result)]))))}] 
    [:p]])
 
+(defn svg-data [img]
+  (for [[k v] (get-colors img)]
+    [(apply get-color k) (apply str (map (fn [[x y]] (make-path-data x y 1)) (reverse v)))]))
+
 (defn mecca []
   [:div
    [import-image]
@@ -95,5 +99,6 @@
          [:h2 "SVG:"]
          [:svg {:width    "100%"
                 :view-box (str "0 0 " (.-width img) " " (.-height img))}
-          (svg-paths (for [[k v] (get-colors img)]
-                       [(apply get-color k) (apply str (map (fn [[x y]] (make-path-data x y 1)) (reverse v)))]))]]])])
+          (svg-paths (svg-data img))]
+         [:h3 "Path data:"]
+         [:p (str (svg-data img))]]])])

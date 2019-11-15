@@ -1,2 +1,2 @@
 # mecca-pix
-Re-frame app for importing and manipulating images
+This came about because of my deep frustration with every SVG tool I could find for tracing bitmaps, I simply wanted to preserve the pixels 1:1 for consistent results. It's entirely unoptimized, as I'm just using it for 8-bit pixel art. For smaller files, use SVGOMG.

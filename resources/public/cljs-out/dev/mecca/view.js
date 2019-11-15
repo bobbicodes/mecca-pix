@@ -190,42 +190,35 @@ return (re_frame.core.dispatch.cljs$core$IFn$_invoke$arity$1 ? re_frame.core.dis
 ;
 })], null)], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$p], null)], null);
 });
-mecca.view.mecca = (function mecca$view$mecca(){
-return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [mecca.view.import_image], null),(function (){var temp__5457__auto__ = cljs.core.deref((function (){var G__13810 = new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$img], null);
-return (re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1 ? re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1(G__13810) : re_frame.core.subscribe.call(null,G__13810));
-})());
-if(cljs.core.truth_(temp__5457__auto__)){
-var img = temp__5457__auto__;
-return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [mecca.view.img_el], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$h2,"SVG:"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$svg,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$width,"100%",cljs.core.cst$kw$view_DASH_box,["0 0 ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(img.width)," ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(img.height)].join('')], null),mecca.view.svg_paths.cljs$core$IFn$_invoke$arity$1((function (){var iter__4324__auto__ = ((function (img,temp__5457__auto__){
-return (function mecca$view$mecca_$_iter__13811(s__13812){
-return (new cljs.core.LazySeq(null,((function (img,temp__5457__auto__){
-return (function (){
-var s__13812__$1 = s__13812;
+mecca.view.svg_data = (function mecca$view$svg_data(img){
+var iter__4324__auto__ = (function mecca$view$svg_data_$_iter__13810(s__13811){
+return (new cljs.core.LazySeq(null,(function (){
+var s__13811__$1 = s__13811;
 while(true){
-var temp__5457__auto____$1 = cljs.core.seq(s__13812__$1);
-if(temp__5457__auto____$1){
-var s__13812__$2 = temp__5457__auto____$1;
-if(cljs.core.chunked_seq_QMARK_(s__13812__$2)){
-var c__4322__auto__ = cljs.core.chunk_first(s__13812__$2);
+var temp__5457__auto__ = cljs.core.seq(s__13811__$1);
+if(temp__5457__auto__){
+var s__13811__$2 = temp__5457__auto__;
+if(cljs.core.chunked_seq_QMARK_(s__13811__$2)){
+var c__4322__auto__ = cljs.core.chunk_first(s__13811__$2);
 var size__4323__auto__ = cljs.core.count(c__4322__auto__);
-var b__13814 = cljs.core.chunk_buffer(size__4323__auto__);
-if((function (){var i__13813 = (0);
+var b__13813 = cljs.core.chunk_buffer(size__4323__auto__);
+if((function (){var i__13812 = (0);
 while(true){
-if((i__13813 < size__4323__auto__)){
-var vec__13815 = cljs.core._nth.cljs$core$IFn$_invoke$arity$2(c__4322__auto__,i__13813);
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13815,(0),null);
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13815,(1),null);
-cljs.core.chunk_append(b__13814,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.apply.cljs$core$IFn$_invoke$arity$2(mecca.view.get_color,k),cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,cljs.core.map.cljs$core$IFn$_invoke$arity$2(((function (i__13813,vec__13815,k,v,c__4322__auto__,size__4323__auto__,b__13814,s__13812__$2,temp__5457__auto____$1,img,temp__5457__auto__){
-return (function (p__13818){
-var vec__13819 = p__13818;
-var x = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13819,(0),null);
-var y = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13819,(1),null);
+if((i__13812 < size__4323__auto__)){
+var vec__13814 = cljs.core._nth.cljs$core$IFn$_invoke$arity$2(c__4322__auto__,i__13812);
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13814,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13814,(1),null);
+cljs.core.chunk_append(b__13813,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.apply.cljs$core$IFn$_invoke$arity$2(mecca.view.get_color,k),cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,cljs.core.map.cljs$core$IFn$_invoke$arity$2(((function (i__13812,vec__13814,k,v,c__4322__auto__,size__4323__auto__,b__13813,s__13811__$2,temp__5457__auto__){
+return (function (p__13817){
+var vec__13818 = p__13817;
+var x = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13818,(0),null);
+var y = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13818,(1),null);
 return mecca.view.make_path_data(x,y,(1));
-});})(i__13813,vec__13815,k,v,c__4322__auto__,size__4323__auto__,b__13814,s__13812__$2,temp__5457__auto____$1,img,temp__5457__auto__))
+});})(i__13812,vec__13814,k,v,c__4322__auto__,size__4323__auto__,b__13813,s__13811__$2,temp__5457__auto__))
 ,cljs.core.reverse(v)))], null));
 
-var G__13829 = (i__13813 + (1));
-i__13813 = G__13829;
+var G__13828 = (i__13812 + (1));
+i__13812 = G__13828;
 continue;
 } else {
 return true;
@@ -233,34 +226,39 @@ return true;
 break;
 }
 })()){
-return cljs.core.chunk_cons(cljs.core.chunk(b__13814),mecca$view$mecca_$_iter__13811(cljs.core.chunk_rest(s__13812__$2)));
+return cljs.core.chunk_cons(cljs.core.chunk(b__13813),mecca$view$svg_data_$_iter__13810(cljs.core.chunk_rest(s__13811__$2)));
 } else {
-return cljs.core.chunk_cons(cljs.core.chunk(b__13814),null);
+return cljs.core.chunk_cons(cljs.core.chunk(b__13813),null);
 }
 } else {
-var vec__13822 = cljs.core.first(s__13812__$2);
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13822,(0),null);
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13822,(1),null);
-return cljs.core.cons(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.apply.cljs$core$IFn$_invoke$arity$2(mecca.view.get_color,k),cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,cljs.core.map.cljs$core$IFn$_invoke$arity$2(((function (vec__13822,k,v,s__13812__$2,temp__5457__auto____$1,img,temp__5457__auto__){
-return (function (p__13825){
-var vec__13826 = p__13825;
-var x = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13826,(0),null);
-var y = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13826,(1),null);
+var vec__13821 = cljs.core.first(s__13811__$2);
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13821,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13821,(1),null);
+return cljs.core.cons(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.apply.cljs$core$IFn$_invoke$arity$2(mecca.view.get_color,k),cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,cljs.core.map.cljs$core$IFn$_invoke$arity$2(((function (vec__13821,k,v,s__13811__$2,temp__5457__auto__){
+return (function (p__13824){
+var vec__13825 = p__13824;
+var x = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13825,(0),null);
+var y = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13825,(1),null);
 return mecca.view.make_path_data(x,y,(1));
-});})(vec__13822,k,v,s__13812__$2,temp__5457__auto____$1,img,temp__5457__auto__))
-,cljs.core.reverse(v)))], null),mecca$view$mecca_$_iter__13811(cljs.core.rest(s__13812__$2)));
+});})(vec__13821,k,v,s__13811__$2,temp__5457__auto__))
+,cljs.core.reverse(v)))], null),mecca$view$svg_data_$_iter__13810(cljs.core.rest(s__13811__$2)));
 }
 } else {
 return null;
 }
 break;
 }
-});})(img,temp__5457__auto__))
-,null,null));
-});})(img,temp__5457__auto__))
-;
+}),null,null));
+});
 return iter__4324__auto__(mecca.view.get_colors(img));
-})())], null)], null)], null);
+});
+mecca.view.mecca = (function mecca$view$mecca(){
+return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [mecca.view.import_image], null),(function (){var temp__5457__auto__ = cljs.core.deref((function (){var G__13829 = new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$img], null);
+return (re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1 ? re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1(G__13829) : re_frame.core.subscribe.call(null,G__13829));
+})());
+if(cljs.core.truth_(temp__5457__auto__)){
+var img = temp__5457__auto__;
+return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [mecca.view.img_el], null),new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$h2,"SVG:"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$svg,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$width,"100%",cljs.core.cst$kw$view_DASH_box,["0 0 ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(img.width)," ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(img.height)].join('')], null),mecca.view.svg_paths.cljs$core$IFn$_invoke$arity$1(mecca.view.svg_data(img))], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$h3,"Path data:"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$p,[cljs.core.str.cljs$core$IFn$_invoke$arity$1(mecca.view.svg_data(img))].join('')], null)], null)], null);
 } else {
 return null;
 }
