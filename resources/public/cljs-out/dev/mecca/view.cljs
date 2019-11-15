@@ -8,10 +8,11 @@
     (if (= (.-length hex) 1) (+ 0 hex) hex)))
 
 (defn get-color [r g b a]
-  (let [a (js/parseInt a)]
-  (when (or (= a "undefined") (= a 255))
-    (str "#" (component->hex r) (component->hex g) (component->hex b)))
-  (when (= a 0) false)
+  (cond
+    (= a 255)
+    (str "#" (component->hex r) (component->hex g) (component->hex b))
+  (= a 0) false
+  :else
   (str "rgba(" r "," g "," b "," (/ a 255) ")")))
 
 (defn make-path-data [x y w]
