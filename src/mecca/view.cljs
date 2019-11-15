@@ -3,6 +3,22 @@
    [re-frame.core :as rf :refer [subscribe dispatch]]
    [goog.object :as o]))
 
+(defn svg-paths
+  ([paths]
+   (svg-paths nil paths 0 0 1))
+  ([attrs paths]
+   (svg-paths attrs paths 0 0 1))
+  ([paths x y]
+   (svg-paths nil paths x y 1))
+  ([paths x y scale]
+   (svg-paths nil paths x y scale))
+  ([attrs paths x y scale]
+   (into [:g (merge attrs
+                    {:transform (str "scale(" scale ") translate(" x "," y ")")})]
+         (for [[color path] paths]
+           [:path {:stroke color
+                   :d      path}]))))
+
 (defn component->hex [c]
   (let [hex (.toString c 16)]
     (if (= (.-length hex) 1) (+ 0 hex) hex)))
@@ -32,15 +48,10 @@
     (.-data (.getImageData ctx 0 0 width height))))
 
 (defn img-el []
-  (let [file (subscribe [:file-upload])
-        el (subscribe [:img])]
+  (let [file (subscribe [:file-upload])]
     (fn []
       [:div
-       [:img {:src @file}]
-       [:p (str "Base64:" @file)]
-         [:div
-          [:p (str "Width: " (.-width @el))]
-          [:p (str "Height: " (.-height @el))]]])))
+       [:img {:src @file}]])))
 
 (defn get-colors [img]
   (let [data (img->data img)
@@ -80,13 +91,9 @@
    (when-let [img @(subscribe [:img])]
      [:div
       [img-el]
-      [:h3 "Pixels by color:"]
-      (for [[k v] (get-colors img)]
         [:div
-         [:span 
-          [:svg {:width 20 :height 20} [:rect {:width 20 :height 20 :fill (str (apply get-color k))}]]
-          (str " "(apply get-color k))]
-         [:p (str (reverse v))]
-         [:p "Path data:"]
-         [:p (apply str (map (fn [[x y]] (make-path-data x y 1)) (reverse v)))]
-         [:p]])])])
+         [:h2 "SVG:"]
+         [:svg {:width    "100%"
+                :view-box (str "0 0 " (.-width img) " " (.-height img))}
+          (svg-paths (for [[k v] (get-colors img)]
+                       [(apply get-color k) (apply str (map (fn [[x y]] (make-path-data x y 1)) (reverse v)))]))]]])])
