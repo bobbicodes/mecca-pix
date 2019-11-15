@@ -16,7 +16,7 @@
   (str "rgba(" r "," g "," b "," (/ a 255) ")")))
 
 (defn make-path-data [x y w]
-  (str "M" x " " y "h" w ""))
+  (str "M" x " " y "h" w))
 
 (defn make-path [color data]
   (str "[\"" color "\" \"" data "\"]\n"))
@@ -71,7 +71,8 @@
          (.readAsDataURL reader file)
          (set! (.-onload reader)
                #(dispatch [:file-upload
-                           (-> % .-target .-result)]))))}]])
+                           (-> % .-target .-result)]))))}] 
+   [:p]])
 
 (defn mecca []
   [:div
@@ -85,5 +86,7 @@
          [:span 
           [:svg {:width 20 :height 20} [:rect {:width 20 :height 20 :fill (str (apply get-color k))}]]
           (str " "(apply get-color k))]
-         [:p (str v)]
+         [:p (str (reverse v))]
+         [:p "Path data:"]
+         [:p (apply str (map (fn [[x y]] (make-path-data x y 1)) (reverse v)))]
          [:p]])])])
