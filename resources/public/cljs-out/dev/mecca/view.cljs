@@ -4,7 +4,7 @@
    [goog.object :as o]))
 
 (defn component->hex [c]
-  (let [hex (.toString (js/parseInt c) 16)]
+  (let [hex (.toString c 16)]
     (if (= (.-length hex) 1) (+ 0 hex) hex)))
 
 (defn get-color [r g b a]
@@ -30,12 +30,6 @@
     (set! (.-height canvas) height) 
     (.drawImage ctx img 0 0) 
     (.-data (.getImageData ctx 0 0 width height))))
-
-(defn make-image
-  [src callback]
-  (let [img (js/Image.)]
-    (set! (.-onload img) callback)
-    (set! (.-src img) src)))
 
 (defn img-el []
   (let [file (subscribe [:file-upload])
@@ -88,6 +82,8 @@
       [:h3 "Pixels by color:"]
       (for [[k v] (get-colors img)]
         [:div
-         [:p]
-         [:p (str (apply get-color k))]
-         [:p (str v)]])])])
+         [:span 
+          [:svg {:width 20 :height 20} [:rect {:width 20 :height 20 :fill (str (apply get-color k))}]]
+          (str " "(apply get-color k))]
+         [:p (str v)]
+         [:p]])])])
