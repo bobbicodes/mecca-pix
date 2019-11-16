@@ -225,7 +225,6 @@ cljs.core.cst$kw$d = new cljs.core.Keyword(null,"d","d",1972142424);
 cljs.core.cst$kw$sub_SLASH_dispose = new cljs.core.Keyword("sub","dispose","sub/dispose",365440536);
 cljs.core.cst$kw$pause = new cljs.core.Keyword(null,"pause","pause",-2095325672);
 cljs.core.cst$kw$error = new cljs.core.Keyword(null,"error","error",-978969032);
-cljs.core.cst$kw$h2 = new cljs.core.Keyword(null,"h2","h2",-372662728);
 cljs.core.cst$kw$componentFunction = new cljs.core.Keyword(null,"componentFunction","componentFunction",825866104);
 cljs.core.cst$kw$exception = new cljs.core.Keyword(null,"exception","exception",-335277064);
 cljs.core.cst$sym$keys = new cljs.core.Symbol(null,"keys","keys",-1586012071,null);

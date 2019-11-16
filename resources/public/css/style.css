@@ -26,7 +26,7 @@
 
 body {
   background-color: lightblue;
-  padding: 4;
+  padding: 10;
   font-family: sans-serif, system-ui;
   font-size: 100%;
   color: var(--black);
@@ -45,17 +45,17 @@ h2 {
     color: purple;
     /* 2x body copy size = 32px */
     line-height: 1;
-    padding : 3px;
+    padding : 8px;
     margin : 0;
     /* 45px / 36px */
   }
 
   p {
-    font-size : 16px;
-    padding : 8px;
+    font-size : 18px;
+    padding : 10px;
     color: rgb(3, 3, 3);
     margin : 0;
-    line-height : 16px;
+    line-height : 20px;
 }
 
 label {
