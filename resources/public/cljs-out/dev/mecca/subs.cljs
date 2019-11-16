@@ -10,3 +10,8 @@
  :img
  (fn [db _]
    (:img db)))
+
+(reg-sub
+ :converting?
+ (fn [db _]
+   (:converting? db)))

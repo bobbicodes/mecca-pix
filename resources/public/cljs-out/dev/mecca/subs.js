@@ -17,3 +17,10 @@ return cljs.core.cst$kw$img.cljs$core$IFn$_invoke$arity$1(db);
 });})(G__13542_13544))
 ;
 (re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$2 ? re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$2(G__13542_13544,G__13543_13545) : re_frame.core.reg_sub.call(null,G__13542_13544,G__13543_13545));
+var G__13546_13548 = cljs.core.cst$kw$converting_QMARK_;
+var G__13547_13549 = ((function (G__13546_13548){
+return (function (db,_){
+return cljs.core.cst$kw$converting_QMARK_.cljs$core$IFn$_invoke$arity$1(db);
+});})(G__13546_13548))
+;
+(re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$2 ? re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$2(G__13546_13548,G__13547_13549) : re_frame.core.reg_sub.call(null,G__13546_13548,G__13547_13549));
