@@ -90,21 +90,26 @@
   (let [file (subscribe [:file-upload])]
     (fn []
       [:div
-       [:h5 "Image:"]
-       [:img {:src @file}]
-       [:h5 "Base64:"]
+       [:p "Original image:"]
+       [:img {:src   @file}]
+       [:p "Scaled:"]
+       [:img {:src @file
+              :width 400}]
+       [:p "Base64:"]
        [:textarea {:rows      3
                    :cols      50
                    :value     (str @file)
                    :read-only true}]])))
 
 (defn svg-output []
-  [:div
-   [:h3 "SVG XML:"]
-   [:textarea {:rows      10
-               :cols      100
-               :value     @(subscribe [:xml])
-               :read-only true}]])
+  (when-let [el (gdom/getElement "converted")]
+    (fn []
+      [:div
+       [:h3 "SVG XML:"]
+       [:textarea {:rows      10
+                   :cols      100
+                   :value     @(subscribe [:xml])
+                   :on-change #(dispatch [:output-xml (.-outerHTML el)])}]])))
 
 (defn mecca []
   [:div
@@ -119,7 +124,7 @@
                           :width           "60%"
                           :view-box        (str "0 -0.5 " (.-width img) " " (.-height img))}
           (svg-paths (svg-data img))]
-         ;[svg-output]
+         [svg-output]
          [:h3 "Path data (EDN):"]
          [:textarea {:rows 10
                      :cols 100

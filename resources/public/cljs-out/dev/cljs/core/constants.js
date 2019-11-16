@@ -169,7 +169,6 @@ cljs.core.cst$sym$if = new cljs.core.Symbol(null,"if","if",1181717262,null);
 cljs.core.cst$kw$parse_DASH_error = new cljs.core.Keyword(null,"parse-error","parse-error",255902478);
 cljs.core.cst$sym$arr = new cljs.core.Symbol(null,"arr","arr",2115492975,null);
 cljs.core.cst$sym$new = new cljs.core.Symbol(null,"new","new",-444906321,null);
-cljs.core.cst$kw$h5 = new cljs.core.Keyword(null,"h5","h5",-1829156625);
 cljs.core.cst$kw$descendants = new cljs.core.Keyword(null,"descendants","descendants",1824886031);
 cljs.core.cst$sym$ns = new cljs.core.Symbol(null,"ns","ns",2082130287,null);
 cljs.core.cst$kw$running = new cljs.core.Keyword(null,"running","running",1554969103);
