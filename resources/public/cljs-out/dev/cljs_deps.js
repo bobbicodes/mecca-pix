@@ -63,7 +63,7 @@ goog.addDependency("../re_frame/subs.js", ['re_frame.subs'], ['re_frame.interop'
 goog.addDependency("../re_frame/core.js", ['re_frame.core'], ['re_frame.interop', 're_frame.interceptor', 're_frame.events', 're_frame.fx', 're_frame.registrar', 'cljs.core', 're_frame.router', 'clojure.set', 're_frame.std_interceptors', 're_frame.loggers', 're_frame.subs', 're_frame.cofx', 're_frame.db']);
 goog.addDependency("../mecca/events.js", ['mecca.events'], ['cljs.core', 're_frame.core']);
 goog.addDependency("../mecca/subs.js", ['mecca.subs'], ['cljs.core', 're_frame.core']);
-goog.addDependency("../mecca/view.js", ['mecca.view'], ['cljs.core', 'goog.object', 're_frame.core']);
+goog.addDependency("../mecca/view.js", ['mecca.view'], ['goog.dom', 'cljs.core', 'goog.object', 're_frame.core']);
 goog.addDependency("../ajax/protocols.js", ['ajax.protocols'], ['cljs.core']);
 goog.addDependency("../ajax/util.js", ['ajax.util'], ['cljs.core', 'ajax.protocols']);
 goog.addDependency("../ajax/url.js", ['ajax.url'], ['cljs.core', 'ajax.util', 'clojure.string']);

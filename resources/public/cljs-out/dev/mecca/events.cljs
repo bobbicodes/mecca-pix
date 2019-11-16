@@ -7,7 +7,8 @@
  (fn [_ _]
    {:file-upload nil
     :converting? false
-    :img nil}))
+    :img nil
+    :xml nil}))
 
 (reg-event-db
  :file-upload
@@ -18,3 +19,9 @@
           :img (let [img (js/Image.)]
                  (set! (.-src img) file)
                  img))))
+
+(reg-event-db
+ :output-xml
+ (fn [db [_ xml]]
+   (assoc db
+          :xml xml)))

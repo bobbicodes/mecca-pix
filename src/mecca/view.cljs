@@ -1,7 +1,8 @@
 (ns ^:figwheel-hooks mecca.view
   (:require
    [re-frame.core :as rf :refer [subscribe dispatch]]
-   [goog.object :as o]))
+   [goog.object :as o]
+   [goog.dom :as gdom]))
 
 (defn svg-paths
   ([paths]
@@ -49,12 +50,6 @@
     (.drawImage ctx img 0 0) 
     (.-data (.getImageData ctx 0 0 width height))))
 
-(defn img-el []
-  (let [file (subscribe [:file-upload])]
-    (fn []
-      [:div
-       [:img {:src @file}]])))
-
 (defn get-colors [img]
   (let [data (img->data img)
         w (.-width img)]
@@ -91,6 +86,26 @@
   (for [[k v] (get-colors img)]
     [(apply get-color k) (apply str (map (fn [[x y]] (make-path-data x y 1)) (reverse v)))]))
 
+(defn img-el []
+  (let [file (subscribe [:file-upload])]
+    (fn []
+      [:div
+       [:h5 "Image:"]
+       [:img {:src @file}]
+       [:h5 "Base64:"]
+       [:textarea {:rows      3
+                   :cols      50
+                   :value     (str @file)
+                   :read-only true}]])))
+
+(defn svg-output []
+  [:div
+   [:h3 "SVG XML:"]
+   [:textarea {:rows      10
+               :cols      100
+               :value     @(subscribe [:xml])
+               :read-only true}]])
+
 (defn mecca []
   [:div
    [import-image]
@@ -99,11 +114,12 @@
       [img-el]
         [:div
          [:h2 "SVG:"]
-         [:svg {:xmlns           "http://www.w3.org/2000/svg"
-                :shape-rendering "crispEdges"
-                :width           "100%"
-                :view-box        (str "0 -0.5 " (.-width img) " " (.-height img))}
+         [:svg#converted {:xmlns           "http://www.w3.org/2000/svg"
+                          :shape-rendering "crispEdges"
+                          :width           "60%"
+                          :view-box        (str "0 -0.5 " (.-width img) " " (.-height img))}
           (svg-paths (svg-data img))]
+         ;[svg-output]
          [:h3 "Path data (EDN):"]
          [:textarea {:rows 10
                      :cols 100

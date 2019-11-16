@@ -15,3 +15,8 @@
  :converting?
  (fn [db _]
    (:converting? db)))
+
+(reg-sub
+ :xml
+ (fn [db _]
+   (:xml db)))

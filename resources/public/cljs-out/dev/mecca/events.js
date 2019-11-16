@@ -4,7 +4,7 @@ goog.require('cljs.core');
 goog.require('cljs.core.constants');
 goog.require('re_frame.core');
 re_frame.core.reg_event_db.cljs$core$IFn$_invoke$arity$2(cljs.core.cst$kw$initialize_DASH_db,(function (_,___$1){
-return new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$file_DASH_upload,null,cljs.core.cst$kw$converting_QMARK_,false,cljs.core.cst$kw$img,null], null);
+return new cljs.core.PersistentArrayMap(null, 4, [cljs.core.cst$kw$file_DASH_upload,null,cljs.core.cst$kw$converting_QMARK_,false,cljs.core.cst$kw$img,null,cljs.core.cst$kw$xml,null], null);
 }));
 re_frame.core.reg_event_db.cljs$core$IFn$_invoke$arity$2(cljs.core.cst$kw$file_DASH_upload,(function (db,p__13532){
 var vec__13533 = p__13532;
@@ -15,4 +15,10 @@ img.src = file;
 
 return img;
 })()], 0));
+}));
+re_frame.core.reg_event_db.cljs$core$IFn$_invoke$arity$2(cljs.core.cst$kw$output_DASH_xml,(function (db,p__13536){
+var vec__13537 = p__13536;
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13537,(0),null);
+var xml = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13537,(1),null);
+return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(db,cljs.core.cst$kw$xml,xml);
 }));
