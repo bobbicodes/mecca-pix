@@ -106,12 +106,18 @@
           (svg-paths (svg-data img))]
          [:h3 "Path data (EDN):"]
          [:textarea {:rows 10
-                     :cols 100} (str (svg-data img))]
+                     :cols 100
+                     :value (str (svg-data img))
+                     :read-only true}]
          [:h3 "Pixels by color:"]
       (for [[k v] (get-colors img)]
+        ^{:key k}
         [:div
          [:span 
-          [:svg {:width 20 :height 20} [:rect {:width 20 :height 20 :fill (str (apply get-color k))}]]
+          [:svg {:width 30 :height 30} [:rect {:width 30 :height 30 :fill (str (apply get-color k))}]]
           (str " "(apply get-color k))]
-          [:textarea {:rows 2
-                      :cols 50} (str v)]])]])])
+         [:p]
+          [:textarea {:rows 3
+                      :cols 30
+                      :value (str v)
+                      :read-only true}]])]])])

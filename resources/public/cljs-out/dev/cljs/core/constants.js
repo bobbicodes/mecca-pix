@@ -293,6 +293,7 @@ cljs.core.cst$kw$re_DASH_frame_DASH_path_SLASH_db_DASH_store = new cljs.core.Key
 cljs.core.cst$kw$http_DASH_xhrio = new cljs.core.Keyword(null,"http-xhrio","http-xhrio",1846166714);
 cljs.core.cst$sym$var = new cljs.core.Symbol(null,"var","var",870848730,null);
 cljs.core.cst$kw$mutable = new cljs.core.Keyword(null,"mutable","mutable",875778266);
+cljs.core.cst$kw$read_DASH_only = new cljs.core.Keyword(null,"read-only","read-only",-191706886);
 cljs.core.cst$kw$json = new cljs.core.Keyword(null,"json","json",1279968570);
 cljs.core.cst$sym$tag_DASH_fn = new cljs.core.Symbol(null,"tag-fn","tag-fn",242055482,null);
 cljs.core.cst$kw$debug_DASH_message = new cljs.core.Keyword(null,"debug-message","debug-message",-502855302);
