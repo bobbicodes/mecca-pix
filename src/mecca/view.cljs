@@ -31,6 +31,8 @@
   :else
   (str "rgba(" r "," g "," b "," (/ a 255) ")")))
 
+;; TODO: implement horizontal color run optimization 
+
 (defn make-path-data [x y w]
   (str "M" x " " y "h" w))
 
@@ -97,8 +99,10 @@
       [img-el]
         [:div
          [:h2 "SVG:"]
-         [:svg {:width    "100%"
-                :view-box (str "0 0 " (.-width img) " " (.-height img))}
+         [:svg {:xmlns "http://www.w3.org/2000/svg"
+                :shape-rendering "crispEdges"
+                :width    "100%"
+                :view-box (str "0 -0.5 " (.-width img) " " (.-height img))}
           (svg-paths (svg-data img))]
          [:h3 "Path data:"]
          [:p (str (svg-data img))]]])])

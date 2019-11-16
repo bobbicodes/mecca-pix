@@ -3,7 +3,6 @@
    [goog.dom :as gdom]
    [reagent.core :as r]
    [re-frame.core :as rf]
-   [re-pressed.core :as rp]
    [day8.re-frame.http-fx]
    [mecca.events]
    [mecca.subs]
