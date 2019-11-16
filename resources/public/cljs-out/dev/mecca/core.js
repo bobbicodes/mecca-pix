@@ -9,17 +9,17 @@ goog.require('day8.re_frame.http_fx');
 goog.require('mecca.events');
 goog.require('mecca.subs');
 goog.require('mecca.view');
-var G__13672_13673 = new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$initialize_DASH_db], null);
-(re_frame.core.dispatch_sync.cljs$core$IFn$_invoke$arity$1 ? re_frame.core.dispatch_sync.cljs$core$IFn$_invoke$arity$1(G__13672_13673) : re_frame.core.dispatch_sync.call(null,G__13672_13673));
+var G__13683_13684 = new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$initialize_DASH_db], null);
+(re_frame.core.dispatch_sync.cljs$core$IFn$_invoke$arity$1 ? re_frame.core.dispatch_sync.cljs$core$IFn$_invoke$arity$1(G__13683_13684) : re_frame.core.dispatch_sync.call(null,G__13683_13684));
 mecca.core.get_app_element = (function mecca$core$get_app_element(){
 return goog.dom.getElement("app");
 });
 mecca.core.mount = (function mecca$core$mount(el){
 (re_frame.core.clear_subscription_cache_BANG_.cljs$core$IFn$_invoke$arity$0 ? re_frame.core.clear_subscription_cache_BANG_.cljs$core$IFn$_invoke$arity$0() : re_frame.core.clear_subscription_cache_BANG_.call(null));
 
-var G__13674 = new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [mecca.view.mecca], null);
-var G__13675 = el;
-return (reagent.core.render_component.cljs$core$IFn$_invoke$arity$2 ? reagent.core.render_component.cljs$core$IFn$_invoke$arity$2(G__13674,G__13675) : reagent.core.render_component.call(null,G__13674,G__13675));
+var G__13685 = new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [mecca.view.mecca], null);
+var G__13686 = el;
+return (reagent.core.render_component.cljs$core$IFn$_invoke$arity$2 ? reagent.core.render_component.cljs$core$IFn$_invoke$arity$2(G__13685,G__13686) : reagent.core.render_component.call(null,G__13685,G__13686));
 });
 mecca.core.mount_app_element = (function mecca$core$mount_app_element(){
 var temp__5457__auto__ = mecca.core.get_app_element();

@@ -258,7 +258,57 @@ return (re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1 ? re_frame.core.su
 })());
 if(cljs.core.truth_(temp__5457__auto__)){
 var img = temp__5457__auto__;
-return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [mecca.view.img_el], null),new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$h2,"SVG:"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$svg,new cljs.core.PersistentArrayMap(null, 4, [cljs.core.cst$kw$xmlns,"http://www.w3.org/2000/svg",cljs.core.cst$kw$shape_DASH_rendering,"crispEdges",cljs.core.cst$kw$width,"100%",cljs.core.cst$kw$view_DASH_box,["0 -0.5 ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(img.width)," ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(img.height)].join('')], null),mecca.view.svg_paths.cljs$core$IFn$_invoke$arity$1(mecca.view.svg_data(img))], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$h3,"Path data (EDN):"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$textarea,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$rows,(10),cljs.core.cst$kw$cols,(100)], null),[cljs.core.str.cljs$core$IFn$_invoke$arity$1(mecca.view.svg_data(img))].join('')], null)], null)], null);
+return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [mecca.view.img_el], null),new cljs.core.PersistentVector(null, 7, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$h2,"SVG:"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$svg,new cljs.core.PersistentArrayMap(null, 4, [cljs.core.cst$kw$xmlns,"http://www.w3.org/2000/svg",cljs.core.cst$kw$shape_DASH_rendering,"crispEdges",cljs.core.cst$kw$width,"100%",cljs.core.cst$kw$view_DASH_box,["0 -0.5 ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(img.width)," ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(img.height)].join('')], null),mecca.view.svg_paths.cljs$core$IFn$_invoke$arity$1(mecca.view.svg_data(img))], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$h3,"Path data (EDN):"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$textarea,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$rows,(10),cljs.core.cst$kw$cols,(100)], null),[cljs.core.str.cljs$core$IFn$_invoke$arity$1(mecca.view.svg_data(img))].join('')], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$h3,"Pixels by color:"], null),(function (){var iter__4324__auto__ = ((function (img,temp__5457__auto__){
+return (function mecca$view$mecca_$_iter__13594(s__13595){
+return (new cljs.core.LazySeq(null,((function (img,temp__5457__auto__){
+return (function (){
+var s__13595__$1 = s__13595;
+while(true){
+var temp__5457__auto____$1 = cljs.core.seq(s__13595__$1);
+if(temp__5457__auto____$1){
+var s__13595__$2 = temp__5457__auto____$1;
+if(cljs.core.chunked_seq_QMARK_(s__13595__$2)){
+var c__4322__auto__ = cljs.core.chunk_first(s__13595__$2);
+var size__4323__auto__ = cljs.core.count(c__4322__auto__);
+var b__13597 = cljs.core.chunk_buffer(size__4323__auto__);
+if((function (){var i__13596 = (0);
+while(true){
+if((i__13596 < size__4323__auto__)){
+var vec__13598 = cljs.core._nth.cljs$core$IFn$_invoke$arity$2(c__4322__auto__,i__13596);
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13598,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13598,(1),null);
+cljs.core.chunk_append(b__13597,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$span,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$svg,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$width,(20),cljs.core.cst$kw$height,(20)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$rect,new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$width,(20),cljs.core.cst$kw$height,(20),cljs.core.cst$kw$fill,[cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.apply.cljs$core$IFn$_invoke$arity$2(mecca.view.get_color,k))].join('')], null)], null)], null),[" ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.apply.cljs$core$IFn$_invoke$arity$2(mecca.view.get_color,k))].join('')], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$textarea,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$rows,(2),cljs.core.cst$kw$cols,(50)], null),[cljs.core.str.cljs$core$IFn$_invoke$arity$1(v)].join('')], null)], null));
+
+var G__13604 = (i__13596 + (1));
+i__13596 = G__13604;
+continue;
+} else {
+return true;
+}
+break;
+}
+})()){
+return cljs.core.chunk_cons(cljs.core.chunk(b__13597),mecca$view$mecca_$_iter__13594(cljs.core.chunk_rest(s__13595__$2)));
+} else {
+return cljs.core.chunk_cons(cljs.core.chunk(b__13597),null);
+}
+} else {
+var vec__13601 = cljs.core.first(s__13595__$2);
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13601,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__13601,(1),null);
+return cljs.core.cons(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$span,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$svg,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$width,(20),cljs.core.cst$kw$height,(20)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$rect,new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$width,(20),cljs.core.cst$kw$height,(20),cljs.core.cst$kw$fill,[cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.apply.cljs$core$IFn$_invoke$arity$2(mecca.view.get_color,k))].join('')], null)], null)], null),[" ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.apply.cljs$core$IFn$_invoke$arity$2(mecca.view.get_color,k))].join('')], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$textarea,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$rows,(2),cljs.core.cst$kw$cols,(50)], null),[cljs.core.str.cljs$core$IFn$_invoke$arity$1(v)].join('')], null)], null),mecca$view$mecca_$_iter__13594(cljs.core.rest(s__13595__$2)));
+}
+} else {
+return null;
+}
+break;
+}
+});})(img,temp__5457__auto__))
+,null,null));
+});})(img,temp__5457__auto__))
+;
+return iter__4324__auto__(mecca.view.get_colors(img));
+})()], null)], null);
 } else {
 return null;
 }
