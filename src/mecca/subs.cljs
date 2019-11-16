@@ -2,9 +2,9 @@
   (:require [re-frame.core :as rf :refer [reg-sub]]))
 
 (reg-sub
- :file-upload
+ :base64
  (fn [db _]
-   (:file-upload db)))
+   (:base64 db)))
 
 (reg-sub
  :img

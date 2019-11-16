@@ -5,7 +5,7 @@
 (reg-event-db
  :initialize-db
  (fn [_ _]
-   {:file-upload nil
+   {:base64 nil
     :converting? false
     :img nil
     :xml nil}))
@@ -15,7 +15,7 @@
  (fn [db [_ file]]
    (assoc db
           :converting? true
-          :file-upload file
+          :base64 file
           :img (let [img (js/Image.)]
                  (set! (.-src img) file)
                  img))))
@@ -23,5 +23,4 @@
 (reg-event-db
  :output-xml
  (fn [db [_ xml]]
-   (assoc db
-          :xml xml)))
+   (assoc db :xml xml)))

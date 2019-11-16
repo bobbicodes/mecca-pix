@@ -5,20 +5,11 @@
    [goog.dom :as gdom]))
 
 (defn svg-paths
-  ([paths]
-   (svg-paths nil paths 0 0 1))
-  ([attrs paths]
-   (svg-paths attrs paths 0 0 1))
-  ([paths x y]
-   (svg-paths nil paths x y 1))
-  ([paths x y scale]
-   (svg-paths nil paths x y scale))
-  ([attrs paths x y scale]
-   (into [:g (merge attrs
-                    {:transform (str "scale(" scale ") translate(" x "," y ")")})]
+  [paths]
+   (into [:g]
          (for [[color path] paths]
            [:path {:stroke color
-                   :d      path}]))))
+                   :d      path}])))
 
 (defn component->hex [c]
   (let [hex (.toString c 16)]
@@ -36,9 +27,6 @@
 
 (defn make-path-data [x y w]
   (str "M" x " " y "h" w))
-
-(defn make-path [color data]
-  (str "[\"" color "\" \"" data "\"]\n"))
 
 (defn img->data [img] 
   (let [canvas (.createElement js/document "canvas")
@@ -66,12 +54,20 @@
                        #(conj % [(mod (/ n 4) w)
                                   (.floor js/Math (/ (/ n 4) w))])))))))
 
+(defn svg-data [img]
+  (for [[k v] (get-colors img)]
+    [(apply get-color k)
+     (apply str
+            (map (fn [[x y]]
+                   (make-path-data x y 1))
+                 (reverse v)))]))
+
 (defn import-image []
   [:div
    [:h1 "Import image file"]
    [:input#input
     {:type      "file"
-     :on-change
+     :on-change 
      (fn [e]
        (let [dom    (o/get e "target")
              file   (o/getValueByKeys dom #js ["files" 0])
@@ -79,37 +75,42 @@
          (.readAsDataURL reader file)
          (set! (.-onload reader)
                #(dispatch [:file-upload
-                           (-> % .-target .-result)]))))}] 
-   [:p]])
-
-(defn svg-data [img]
-  (for [[k v] (get-colors img)]
-    [(apply get-color k) (apply str (map (fn [[x y]] (make-path-data x y 1)) (reverse v)))]))
+                           (-> % .-target .-result)]))))}]])
 
 (defn img-el []
-  (let [file (subscribe [:file-upload])]
+  (let [file (subscribe [:base64])
+        img (subscribe [:img])]
     (fn []
       [:div
        [:p "Original image:"]
        [:img {:src   @file}]
-       [:p "Scaled:"]
+       [:p "Scaled to 480px:"]
        [:img {:src @file
-              :width 400}]
+              :width 480}]
        [:p "Base64:"]
        [:textarea {:rows      3
                    :cols      50
                    :value     (str @file)
                    :read-only true}]])))
 
+(defn edn->xml [width height paths]
+  (str "<svg xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"crispEdges\" viewBox=\"0 -0.5 " width " " height "\"><g>"
+       (apply str (for [[color path] paths]
+              (str "<path stroke=\"" color "\" " "d=\"" path "\"></path>")))
+       "</g></svg>"))
+
 (defn svg-output []
-  (when-let [el (gdom/getElement "converted")]
+  (let [xml (subscribe [:xml])
+        img (subscribe [:img])
+        width (.-width @img)
+        height (.-height @img)]
     (fn []
       [:div
        [:h3 "SVG XML:"]
        [:textarea {:rows      10
                    :cols      100
-                   :value     @(subscribe [:xml])
-                   :on-change #(dispatch [:output-xml (.-outerHTML el)])}]])))
+                   :value     (edn->xml width height (svg-data @img))
+                   :read-only true}]])))
 
 (defn mecca []
   [:div
@@ -117,11 +118,17 @@
    (when-let [img @(subscribe [:img])]
      [:div
       [img-el]
+      [:div
+       [:p "Image data:"]
+       [:textarea {:rows      3
+                   :cols      50
+                   :value     (str (img->data img))
+                   :read-only true}]]
         [:div
          [:h2 "SVG:"]
          [:svg#converted {:xmlns           "http://www.w3.org/2000/svg"
                           :shape-rendering "crispEdges"
-                          :width           "60%"
+                          :width           480
                           :view-box        (str "0 -0.5 " (.-width img) " " (.-height img))}
           (svg-paths (svg-data img))]
          [svg-output]

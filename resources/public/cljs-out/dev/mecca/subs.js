@@ -3,10 +3,10 @@ goog.provide('mecca.subs');
 goog.require('cljs.core');
 goog.require('cljs.core.constants');
 goog.require('re_frame.core');
-var G__13542_13544 = cljs.core.cst$kw$file_DASH_upload;
+var G__13542_13544 = cljs.core.cst$kw$base64;
 var G__13543_13545 = ((function (G__13542_13544){
 return (function (db,_){
-return cljs.core.cst$kw$file_DASH_upload.cljs$core$IFn$_invoke$arity$1(db);
+return cljs.core.cst$kw$base64.cljs$core$IFn$_invoke$arity$1(db);
 });})(G__13542_13544))
 ;
 (re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$2 ? re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$2(G__13542_13544,G__13543_13545) : re_frame.core.reg_sub.call(null,G__13542_13544,G__13543_13545));
