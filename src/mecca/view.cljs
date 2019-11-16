@@ -1,8 +1,7 @@
 (ns ^:figwheel-hooks mecca.view
   (:require
    [re-frame.core :as rf :refer [subscribe dispatch]]
-   [goog.object :as o]
-   [goog.dom :as gdom]))
+   [goog.object :as o]))
 
 (defn svg-paths
   [paths]
@@ -78,8 +77,7 @@
                            (-> % .-target .-result)]))))}]])
 
 (defn img-el []
-  (let [file (subscribe [:base64])
-        img (subscribe [:img])]
+  (let [file (subscribe [:base64])]
     (fn []
       [:div
        [:p "Original image:"]
@@ -96,12 +94,11 @@
 (defn edn->xml [width height paths]
   (str "<svg xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"crispEdges\" viewBox=\"0 -0.5 " width " " height "\"><g>"
        (apply str (for [[color path] paths]
-              (str "<path stroke=\"" color "\" " "d=\"" path "\"></path>")))
+              (str "<path stroke=\"" color "\" " "d=\"" path "\"></path>\n")))
        "</g></svg>"))
 
 (defn svg-output []
-  (let [xml (subscribe [:xml])
-        img (subscribe [:img])
+  (let [img (subscribe [:img])
         width (.-width @img)
         height (.-height @img)]
     (fn []
