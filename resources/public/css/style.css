@@ -51,11 +51,15 @@ h2 {
   }
 
   p {
-    font-size : 18px;
-    padding : 10px;
+    font-size : 16px;
+    padding : 4px;
     color: rgb(3, 3, 3);
     margin : 0;
-    line-height : 20px;
+    line-height : 16px;
+}
+
+textarea {
+  margin-bottom: 8px;
 }
 
 label {

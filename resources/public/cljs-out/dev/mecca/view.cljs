@@ -2,7 +2,7 @@
   (:require
    [re-frame.core :as rf :refer [subscribe dispatch]]
    [goog.object :as o]
-   [mecca.pix :refer [get-color get-colors img->data edn->xml svg-data svg-paths]]))
+   [mecca.pix :refer [get-pixels get-color img->data edn->xml svg-data svg-paths]]))
 
 (defn import-image []
   [:div
@@ -71,15 +71,16 @@
 (defn color-pix []
   [:div
    [:h3 "Pixels by color:"]
-   (for [[k v] (get-colors @(subscribe [:img]))]
+   (for [[k v] (get-pixels @(subscribe [:img]))]
      ^{:key k}
      [:div
       [:span
-       [:svg {:width  30
-              :height 30} [:rect {:width  30
-                                  :height 30
+       [:svg {:width  40
+              :height 40} [:rect {:width  40
+                                  :height 40
                                   :fill   (str (apply get-color k))}]]
-       (str " " (apply get-color k))]
+       [:p (str "RGBA: " k)]
+       [:p (str "Hex: " (apply get-color k))]]
       [:textarea {:rows      3
                   :cols      30
                   :value     (str (reverse v))
@@ -99,8 +100,7 @@
 
 (comment
   
-canvas
-  
+
   (let [canvas (.getElementById js/document "canvas")
         ctx    (.getContext canvas "2d")
         img (js/Image.)]
@@ -111,5 +111,4 @@ canvas
             (set! (.. img -style -display) "none"))))
   
   (keys (get-colors @(subscribe [:img])))
-  (img)
   )

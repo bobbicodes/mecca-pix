@@ -10,7 +10,7 @@
     (str "#" (component->hex r) (component->hex g) (component->hex b))))
 
 (defn img->data 
-  "Draw image onto HTML Canvas, returns a
+  "Draws image onto HTML Canvas, returns a
    Uint8ClampedArray of rgba values (0-255 inclusive)"
   [img]
   (let [canvas (.createElement js/document "canvas")
@@ -22,20 +22,15 @@
     (.drawImage ctx img 0 0)
     (.-data (.getImageData ctx 0 0 width height))))
 
-;; TODO: color quantization must be done
-;; *before* assembling paths.
-;; interactively limit color pallet
-;; to maximize color run optimization.
-
-(defn get-colors [img]
+(defn get-pixels [img]
   (let [data (img->data img)
         w    (.-width img)]
     (loop [n      0
-           colors {}]
+           pixels {}]
       (if (>= n (.-length data))
-        (dissoc colors [0 0 0 0])
+        (dissoc pixels [0 0 0 0])
         (recur (+ 4 n)
-               (update colors
+               (update pixels
                        [(aget data n)
                         (aget data (+ n 1))
                         (aget data (+ n 2))
@@ -43,13 +38,47 @@
                        #(conj % [(mod (/ n 4) w)
                                  (.floor js/Math (/ (/ n 4) w))])))))))
 
+;; TODO: color quantization must be done *before* assembling paths -
+;; limiting color pallet will maximize color run optimization.
+
+(defn compare-rgb
+  "Takes 2 vectors of rgba values,
+   returns a score of how different they are.
+   Score of 0 means same color. 765 means black and white."
+  [color1 color2]
+  (loop [c1   color1
+         c2   color2
+         diff 0]
+    (if (= 1 (count c1))
+      diff
+      (recur (rest c1) (rest c2)
+             (+ diff (.abs js/Math (- (first c1)
+                                      (first c2))))))))
+
+(defn color-sort
+  "Returns a sequence of an image's colors sorted by similarity to others"
+  [img]
+  (let [pixels (get-pixels img)
+        colors (keys pixels)]
+    (sort-by :score (for [color colors]
+                      {:color color
+                       :score (reduce + (map #(compare-rgb color %) colors))}))))
+
 (comment
- (dissoc (get-colors @(subscribe [:img])) [0 0 0 0])
- )
+  
+  (compare-rgb [153 51 204 255] [153 102 153 255])
+  (compare-rgb [153 102 153 255] [204 204 204 255])
+  (compare-rgb [204 204 204 255]  [255 204 204 255])
+  (compare-rgb [0 0 0 0]  [255 255 255 255])
+  (compare-rgb [153 204 255 255]  [153 204 255 255])
+  
+  (color-sort @(subscribe [:img]))
+  
+  )
 
 (defn svg-paths
   "Accepts SVG paths in the form [[color1 path1] [color2 path2] ...]
-   and outputs a reagent element"
+   and outputs a reagent hiccup element"
   [paths]
   (into [:g]
         (for [[color path] paths]
@@ -58,7 +87,7 @@
 
 (defn edn->xml 
   "Accepts SVG paths in the form [[color1 path1] [color2 path2] ...]
-  and outputs proper SVG"
+   and outputs SVG in XML"
   [width height paths]
   (str "<svg xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"crispEdges\" viewBox=\"0 -0.5 "
        width " " height "\"><g>"
@@ -81,7 +110,7 @@
   (str "M" x " " y "h" w))
 
 (defn svg-data [img]
-  (for [[k v] (get-colors img)]
+  (for [[k v] (get-pixels img)]
     [(apply get-color k)
      (apply str (map (fn [[x y]] (make-path-data x y 1))
                      (reverse v)))]))
