@@ -2,11 +2,11 @@
   (:require
    [re-frame.core :as rf :refer [subscribe dispatch]]
    [goog.object :as o]
-   [mecca.pix :refer [get-pixels get-color img->data edn->xml svg-data svg-paths]]))
+   [mecca.pix :refer [get-pixels similar-colors rgba->hex img->data edn->xml svg-data svg-paths]]))
 
 (defn import-image []
   [:div
-   [:h1 "Import image file"]
+   [:h1 "Import pixel art"]
    [:input#input
     {:type      "file"
      :on-change 
@@ -68,23 +68,28 @@
                :value     (str (img->data @(subscribe [:img])))
                :read-only true}]])
 
-(defn color-pix []
+(defn color-pix
+  "Renders image's colors sorted by similarity to each other,
+  with most similar on top"
+  []
   [:div
    [:h3 "Pixels by color:"]
-   (for [[k v] (get-pixels @(subscribe [:img]))]
-     ^{:key k}
-     [:div
-      [:span
-       [:svg {:width  40
-              :height 40} [:rect {:width  40
-                                  :height 40
-                                  :fill   (str (apply get-color k))}]]
-       [:p (str "RGBA: " k)]
-       [:p (str "Hex: " (apply get-color k))]]
-      [:textarea {:rows      3
-                  :cols      30
-                  :value     (str (reverse v))
-                  :read-only true}]])])
+   (let [pixels (get-pixels @(subscribe [:img]))
+         colors (similar-colors (keys pixels))]
+     (for [color colors]
+       ^{:key color}
+       [:div
+        [:span
+         [:svg {:width  40
+                :height 40} [:rect {:width  40
+                                    :height 40
+                                    :fill   (str (apply rgba->hex color))}]]
+         [:p (str "RGBA: " color)]
+         [:p (str "Hex: " (apply rgba->hex color))]]
+        [:textarea {:rows      3
+                    :cols      30
+                    :value     (str (reverse (get pixels color)))
+                    :read-only true}]]))])
 
 (defn mecca []
   [:div
@@ -100,7 +105,6 @@
 
 (comment
   
-
   (let [canvas (.getElementById js/document "canvas")
         ctx    (.getContext canvas "2d")
         img (js/Image.)]
@@ -109,6 +113,6 @@
           (fn []
             (.drawImage ctx img 0 0)
             (set! (.. img -style -display) "none"))))
-  
+
   (keys (get-pixels @(subscribe [:img])))
   )

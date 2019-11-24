@@ -5,11 +5,11 @@
   (let [hex (.toString c 16)]
     (if (= (.-length hex) 1) (+ 0 hex) hex)))
 
-(defn get-color [r g b a]
+(defn rgba->hex [r g b a]
   (when-not (= a 0)
     (str "#" (component->hex r) (component->hex g) (component->hex b))))
 
-(defn img->data 
+(defn img->data
   "Draws image onto HTML Canvas, returns a
    Uint8ClampedArray of rgba values (0-255 inclusive)"
   [img]
@@ -22,7 +22,10 @@
     (.drawImage ctx img 0 0)
     (.-data (.getImageData ctx 0 0 width height))))
 
-(defn get-pixels [img]
+(defn get-pixels 
+  "Takes an HTMLImageElement, returns a map of
+  the colors to their corresponding pixels"
+  [img]
   (let [data (img->data img)
         w    (.-width img)]
     (loop [n      0
@@ -64,16 +67,32 @@
                       {:color color
                        :score (reduce + (map #(compare-rgb color %) colors))}))))
 
+(defn closest-neighbor
+  "Returns distance of nearest color to color in colors"
+  [color colors]
+  (second (sort (map #(compare-rgb color %) colors))))
+
+(defn similar-colors 
+  "Takes a collection of rgba vectors,
+  sorts them by colors closest to each other"
+  [colors]
+  (sort-by #(closest-neighbor % colors)
+           colors))
+
 (comment
-  
+
   (compare-rgb [153 51 204 255] [153 102 153 255])
   (compare-rgb [153 102 153 255] [204 204 204 255])
   (compare-rgb [204 204 204 255]  [255 204 204 255])
   (compare-rgb [0 0 0 0]  [255 255 255 255])
   (compare-rgb [153 204 255 255]  [153 204 255 255])
-  
+
+  (keys (get-pixels @(subscribe [:img])))
   (color-sort @(subscribe [:img]))
+
+(closest-neighbor [0 0 1 255] (keys (get-pixels @(subscribe [:img]))))
   
+  (similar-colors (keys (get-pixels @(subscribe [:img]))))
   )
 
 (defn svg-paths
@@ -111,6 +130,6 @@
 
 (defn svg-data [img]
   (for [[k v] (get-pixels img)]
-    [(apply get-color k)
+    [(apply rgba->hex k)
      (apply str (map (fn [[x y]] (make-path-data x y 1))
                      (reverse v)))]))
