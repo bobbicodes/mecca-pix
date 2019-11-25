@@ -1,11 +1,19 @@
 (ns mecca.pix
   (:require [re-frame.core :refer [subscribe]]))
 
-(defn component->hex [c]
+(defn component->hex
+  "Takes ASCII value 0-255, returns hex byte as string"
+  [c]
   (let [hex (.toString c 16)]
     (if (= (count hex) 1) (+ 0 hex) hex)))
 
-(defn rgba->hex [r g b a]
+(comment 
+  (component->hex 255)
+  )
+
+(defn rgba->hex
+  "Returns proper hex color code. Ignores fully transparent colors."
+  [r g b a]
   (when-not (= a 0)
     (str "#" (component->hex r) (component->hex g) (component->hex b))))
 
@@ -45,27 +53,21 @@
 ;; limiting color pallet will maximize color run optimization.
 
 (defn compare-rgb
-  "Takes 2 vectors of rgba values,
-   returns a score of how different they are.
-   Score of 0 means same color. 765 means black and white."
-  [color1 color2]
-  (loop [c1   color1
-         c2   color2
-         diff 0]
-    (if (= 1 (count c1))
-      diff
-      (recur (rest c1) (rest c2)
-             (+ diff (.abs js/Math (- (first c1)
-                                      (first c2))))))))
+  "Quantifies euclidean distance in 3 dimensional color space"
+  [[r1 g1 b1 _] [r2 g2 b2 _]]
+  (.sqrt js/Math (+ (.pow js/Math (- r1 r2) 2)
+                    (.pow js/Math (- g1 g2) 2)
+                    (.pow js/Math (- b1 b2) 2))))
 
-(defn color-sort
-  "Returns a sequence of an image's colors sorted by similarity to others"
-  [img]
-  (let [pixels (get-pixels img)
-        colors (keys pixels)]
-    (sort-by :score (for [color colors]
-                      {:color color
-                       :score (reduce + (map #(compare-rgb color %) colors))}))))
+(comment
+  (compare-rgb  [102 51 204 255] [102 51 153 255])
+  (compare-rgb [153 51 204 255] [153 102 153 255])
+(compare-rgb [153 102 153 255] [204 204 204 255])
+(compare-rgb [204 204 204 255]  [255 204 204 255])
+(compare-rgb [0 0 0 0]  [255 255 255 255])
+(compare-rgb [153 204 255 255]  [153 204 255 255])
+
+  )
 
 (defn closest-neighbor
   "Returns distance of nearest color to color in colors"
@@ -80,15 +82,7 @@
            colors))
 
 (comment
-
-  (compare-rgb [153 51 204 255] [153 102 153 255])
-  (compare-rgb [153 102 153 255] [204 204 204 255])
-  (compare-rgb [204 204 204 255]  [255 204 204 255])
-  (compare-rgb [0 0 0 0]  [255 255 255 255])
-  (compare-rgb [153 204 255 255]  [153 204 255 255])
-
   (keys (get-pixels @(subscribe [:img])))
-  (color-sort @(subscribe [:img]))
   
   (closest-neighbor [0 0 1 255] (keys (get-pixels @(subscribe [:img]))))
 

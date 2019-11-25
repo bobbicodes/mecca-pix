@@ -2,7 +2,7 @@
   (:require
    [re-frame.core :as rf :refer [subscribe dispatch]]
    [goog.object :as o]
-   [mecca.pix :refer [get-pixels similar-colors rgba->hex img->data edn->xml svg-data svg-paths]]))
+   [mecca.pix :refer [get-pixels closest-neighbor similar-colors rgba->hex img->data edn->xml svg-data svg-paths]]))
 
 (defn import-image []
   [:div
@@ -84,7 +84,8 @@
                 :height 40} [:rect {:width  40
                                     :height 40
                                     :fill   (str (apply rgba->hex color))}]]
-         [:p (str "RGBA: " color)]
+         [:p (str "Color distance: " (.round js/Math (closest-neighbor color colors)))]
+         [:p (str "RGBA: " (apply str (interpose " " color)))]
          [:p (str "Hex: " (apply rgba->hex color))]]
         [:textarea {:rows      3
                     :cols      30
