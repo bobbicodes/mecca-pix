@@ -6,19 +6,19 @@ goog.require('re_frame.core');
 re_frame.core.reg_event_db.cljs$core$IFn$_invoke$arity$2(cljs.core.cst$kw$initialize_DASH_db,(function (_,___$1){
 return new cljs.core.PersistentArrayMap(null, 4, [cljs.core.cst$kw$base64,null,cljs.core.cst$kw$converting_QMARK_,false,cljs.core.cst$kw$img,null,cljs.core.cst$kw$xml,null], null);
 }));
-re_frame.core.reg_event_db.cljs$core$IFn$_invoke$arity$2(cljs.core.cst$kw$file_DASH_upload,(function (db,p__12605){
-var vec__12606 = p__12605;
-var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12606,(0),null);
-var file = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12606,(1),null);
+re_frame.core.reg_event_db.cljs$core$IFn$_invoke$arity$2(cljs.core.cst$kw$file_DASH_upload,(function (db,p__12606){
+var vec__12607 = p__12606;
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12607,(0),null);
+var file = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12607,(1),null);
 return cljs.core.assoc.cljs$core$IFn$_invoke$arity$variadic(db,cljs.core.cst$kw$converting_QMARK_,true,cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.cst$kw$base64,file,cljs.core.cst$kw$img,(function (){var img = (new Image());
 img.src = file;
 
 return img;
 })()], 0));
 }));
-re_frame.core.reg_event_db.cljs$core$IFn$_invoke$arity$2(cljs.core.cst$kw$output_DASH_xml,(function (db,p__12609){
-var vec__12610 = p__12609;
-var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12610,(0),null);
-var xml = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12610,(1),null);
+re_frame.core.reg_event_db.cljs$core$IFn$_invoke$arity$2(cljs.core.cst$kw$output_DASH_xml,(function (db,p__12610){
+var vec__12611 = p__12610;
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12611,(0),null);
+var xml = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12611,(1),null);
 return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(db,cljs.core.cst$kw$xml,xml);
 }));

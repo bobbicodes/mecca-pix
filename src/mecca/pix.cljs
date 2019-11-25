@@ -3,7 +3,7 @@
 
 (defn component->hex [c]
   (let [hex (.toString c 16)]
-    (if (= (.-length hex) 1) (+ 0 hex) hex)))
+    (if (= (count hex) 1) (+ 0 hex) hex)))
 
 (defn rgba->hex [r g b a]
   (when-not (= a 0)
@@ -89,11 +89,10 @@
 
   (keys (get-pixels @(subscribe [:img])))
   (color-sort @(subscribe [:img]))
-
-(closest-neighbor [0 0 1 255] (keys (get-pixels @(subscribe [:img]))))
   
-  (similar-colors (keys (get-pixels @(subscribe [:img]))))
-  )
+  (closest-neighbor [0 0 1 255] (keys (get-pixels @(subscribe [:img]))))
+
+  (similar-colors (keys (get-pixels @(subscribe [:img])))))
 
 (defn svg-paths
   "Accepts SVG paths in the form [[color1 path1] [color2 path2] ...]
@@ -116,8 +115,7 @@
 
 (comment
 
-  (partition-by last
-                '([0 0] [1 0] [2 0] [3 0] [4 0] [5 0] [6 0] [10 0] [11 0] [12 0] [13 0] [14 0] [15 0] [16 0] [0 1] [1 1] [2 1] [3 1] [4 1] [12 1] [13 1] [14 1] [15 1] [16 1]))
+  (partition-by last   '([0 0] [1 0] [2 0] [3 0] [4 0] [5 0] [6 0] [10 0] [11 0] [12 0] [13 0] [14 0] [15 0] [16 0] [0 1] [1 1] [2 1] [3 1] [4 1] [12 1] [13 1] [14 1] [15 1] [16 1]))
 
   '([0 0] [10 0] [11 0] [16 0] [0 1] [4 1] [12 1] [16 1])
 

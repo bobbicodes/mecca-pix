@@ -101,7 +101,12 @@
       [scaled-image]
       [base64]
       [img-data]
-      [color-pix]])])
+      [:p "Path data (EDN):"]
+      [:textarea {:rows      10
+                  :cols      48
+                  :value     (str (svg-data @(subscribe [:img])))
+                  :read-only true}]
+     [color-pix]])])
 
 (comment
   

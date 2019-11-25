@@ -5,7 +5,7 @@ goog.require('cljs.core.constants');
 goog.require('re_frame.core');
 mecca.pix.component__GT_hex = (function mecca$pix$component__GT_hex(c){
 var hex = c.toString((16));
-if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(hex.length,(1))){
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.count(hex),(1))){
 return ((0) + hex);
 } else {
 return hex;
