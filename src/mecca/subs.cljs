@@ -12,9 +12,9 @@
    (:img db)))
 
 (reg-sub
- :converting?
+ :loading?
  (fn [db _]
-   (:converting? db)))
+   (:loading? db)))
 
 (reg-sub
  :xml

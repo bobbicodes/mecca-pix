@@ -6,7 +6,7 @@
  :initialize-db
  (fn [_ _]
    {:base64 nil
-    :converting? false
+    :loading? false
     :img nil
     :xml nil}))
 
@@ -14,11 +14,17 @@
  :file-upload
  (fn [db [_ file]]
    (assoc db
-          :converting? true
           :base64 file
           :img (let [img (js/Image.)]
                  (set! (.-src img) file)
                  img))))
+
+(reg-event-db
+ :set-loading
+ (fn [db [_ _]]
+   (assoc db
+          :loading? true
+          :img nil)))
 
 (reg-event-db
  :output-xml

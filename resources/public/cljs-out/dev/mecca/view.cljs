@@ -11,13 +11,17 @@
     {:type      "file"
      :on-change 
      (fn [e]
+       (dispatch [:set-loading])
        (let [dom    (o/get e "target")
              file   (o/getValueByKeys dom #js ["files" 0])
              reader (js/FileReader.)]
          (.readAsDataURL reader file)
          (set! (.-onload reader)
                #(dispatch [:file-upload
-                           (-> % .-target .-result)]))))}]])
+                           (-> % .-target .-result)]))))}]
+   (when (and (not @(subscribe [:img]))
+              @(subscribe [:loading?]))
+     [:p.fade "Loading..."])])
 
 (defn scaled-image []
   [:div
@@ -121,4 +125,6 @@
             (set! (.. img -style -display) "none"))))
 
   (keys (get-pixels @(subscribe [:img])))
+  (not @(subscribe [:img]))
+  (get-pixels @(subscribe [:img]))
   )

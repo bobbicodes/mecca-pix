@@ -81,7 +81,7 @@ label {
 }
  
 .fade {
-  animation: fade 0.7s 0s infinite;
+  animation: fade 1s 0s ease infinite;
 }
 
 @keyframes fade {
@@ -91,89 +91,5 @@ label {
   
   100% {
     opacity: 1;
-  }
-}
-
-@keyframes jumpup {
-  0% {
-    transform: translateY(0px);
-  }
-  64% {
-    transform: translateY(-50px);
-  }
-  80% {
-    transform: translateY(-65px);
-  }
-  100% {
-    transform: translateY(-70px);
-  }
-}
-
-@keyframes jumpdown {
-  0% {
-    transform: translateY(-70px);
-  }
-  20% {
-    transform: translateY(-65px);
-  }
-  60% {
-    transform: translateY(-50px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-.banana{
-  position: absolute;
-  width: 24px;
-  height: 41px;
-  top: 41px;
-  left:0px;
-  
-          animation: play 0.8s steps(2) infinite,
-              run 7s both infinite linear;
-}
-
-@keyframes play{
-  100%{background-position: 24px;}
-}
-
-@keyframes run{
-  from{left: -72px;}
-  to{left: 100%;}
-}
-
-/* loading ~~~~~~~~~~~~~~~~~~~~~ */
-.loading {
-  background: var(--white);
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.loading p {
-  font-size: 200%;
-  text-align: center;
-  animation: loading ease-in-out 2s infinite;
-}
-
-@keyframes loading {
-  0% {
-    opacity: 0;
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
   }
 }

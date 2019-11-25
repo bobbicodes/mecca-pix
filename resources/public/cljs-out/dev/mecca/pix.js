@@ -54,14 +54,14 @@ while(true){
 if((n >= data.length)){
 return cljs.core.dissoc.cljs$core$IFn$_invoke$arity$2(pixels,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [(0),(0),(0),(0)], null));
 } else {
-var G__12559 = ((4) + n);
-var G__12560 = cljs.core.update.cljs$core$IFn$_invoke$arity$3(pixels,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [(data[n]),(data[(n + (1))]),(data[(n + (2))]),(data[(n + (3))])], null),((function (n,pixels,data,w){
-return (function (p1__12558_SHARP_){
-return cljs.core.conj.cljs$core$IFn$_invoke$arity$2(p1__12558_SHARP_,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.mod((n / (4)),w),Math.floor(((n / (4)) / w))], null));
+var G__12563 = ((4) + n);
+var G__12564 = cljs.core.update.cljs$core$IFn$_invoke$arity$3(pixels,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [(data[n]),(data[(n + (1))]),(data[(n + (2))]),(data[(n + (3))])], null),((function (n,pixels,data,w){
+return (function (p1__12562_SHARP_){
+return cljs.core.conj.cljs$core$IFn$_invoke$arity$2(p1__12562_SHARP_,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.mod((n / (4)),w),Math.floor(((n / (4)) / w))], null));
 });})(n,pixels,data,w))
 );
-n = G__12559;
-pixels = G__12560;
+n = G__12563;
+pixels = G__12564;
 continue;
 }
 break;
@@ -70,25 +70,25 @@ break;
 /**
  * Quantifies euclidean distance in 3 dimensional color space
  */
-mecca.pix.compare_rgb = (function mecca$pix$compare_rgb(p__12561,p__12562){
-var vec__12563 = p__12561;
-var r1 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12563,(0),null);
-var g1 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12563,(1),null);
-var b1 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12563,(2),null);
-var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12563,(3),null);
-var vec__12566 = p__12562;
-var r2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12566,(0),null);
-var g2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12566,(1),null);
-var b2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12566,(2),null);
-var ___$1 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12566,(3),null);
+mecca.pix.compare_rgb = (function mecca$pix$compare_rgb(p__12565,p__12566){
+var vec__12567 = p__12565;
+var r1 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12567,(0),null);
+var g1 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12567,(1),null);
+var b1 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12567,(2),null);
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12567,(3),null);
+var vec__12570 = p__12566;
+var r2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12570,(0),null);
+var g2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12570,(1),null);
+var b2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12570,(2),null);
+var ___$1 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12570,(3),null);
 return Math.sqrt(((Math.pow((r1 - r2),(2)) + Math.pow((g1 - g2),(2))) + Math.pow((b1 - b2),(2))));
 });
 /**
  * Returns distance of nearest color to color in colors
  */
 mecca.pix.closest_neighbor = (function mecca$pix$closest_neighbor(color,colors){
-return cljs.core.second(cljs.core.sort.cljs$core$IFn$_invoke$arity$1(cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__12569_SHARP_){
-return mecca.pix.compare_rgb(color,p1__12569_SHARP_);
+return cljs.core.second(cljs.core.sort.cljs$core$IFn$_invoke$arity$1(cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__12573_SHARP_){
+return mecca.pix.compare_rgb(color,p1__12573_SHARP_);
 }),colors)));
 });
 /**
@@ -96,8 +96,8 @@ return mecca.pix.compare_rgb(color,p1__12569_SHARP_);
  *   sorts them by colors closest to each other
  */
 mecca.pix.similar_colors = (function mecca$pix$similar_colors(colors){
-return cljs.core.sort_by.cljs$core$IFn$_invoke$arity$2((function (p1__12570_SHARP_){
-return mecca.pix.closest_neighbor(p1__12570_SHARP_,colors);
+return cljs.core.sort_by.cljs$core$IFn$_invoke$arity$2((function (p1__12574_SHARP_){
+return mecca.pix.closest_neighbor(p1__12574_SHARP_,colors);
 }),colors);
 });
 /**
@@ -105,27 +105,27 @@ return mecca.pix.closest_neighbor(p1__12570_SHARP_,colors);
  * and outputs a reagent hiccup element
  */
 mecca.pix.svg_paths = (function mecca$pix$svg_paths(paths){
-return cljs.core.into.cljs$core$IFn$_invoke$arity$2(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$g], null),(function (){var iter__4324__auto__ = (function mecca$pix$svg_paths_$_iter__12571(s__12572){
+return cljs.core.into.cljs$core$IFn$_invoke$arity$2(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$g], null),(function (){var iter__4324__auto__ = (function mecca$pix$svg_paths_$_iter__12575(s__12576){
 return (new cljs.core.LazySeq(null,(function (){
-var s__12572__$1 = s__12572;
+var s__12576__$1 = s__12576;
 while(true){
-var temp__5457__auto__ = cljs.core.seq(s__12572__$1);
+var temp__5457__auto__ = cljs.core.seq(s__12576__$1);
 if(temp__5457__auto__){
-var s__12572__$2 = temp__5457__auto__;
-if(cljs.core.chunked_seq_QMARK_(s__12572__$2)){
-var c__4322__auto__ = cljs.core.chunk_first(s__12572__$2);
+var s__12576__$2 = temp__5457__auto__;
+if(cljs.core.chunked_seq_QMARK_(s__12576__$2)){
+var c__4322__auto__ = cljs.core.chunk_first(s__12576__$2);
 var size__4323__auto__ = cljs.core.count(c__4322__auto__);
-var b__12574 = cljs.core.chunk_buffer(size__4323__auto__);
-if((function (){var i__12573 = (0);
+var b__12578 = cljs.core.chunk_buffer(size__4323__auto__);
+if((function (){var i__12577 = (0);
 while(true){
-if((i__12573 < size__4323__auto__)){
-var vec__12575 = cljs.core._nth.cljs$core$IFn$_invoke$arity$2(c__4322__auto__,i__12573);
-var color = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12575,(0),null);
-var path = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12575,(1),null);
-cljs.core.chunk_append(b__12574,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$path,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$stroke,color,cljs.core.cst$kw$d,path], null)], null));
+if((i__12577 < size__4323__auto__)){
+var vec__12579 = cljs.core._nth.cljs$core$IFn$_invoke$arity$2(c__4322__auto__,i__12577);
+var color = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12579,(0),null);
+var path = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12579,(1),null);
+cljs.core.chunk_append(b__12578,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$path,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$stroke,color,cljs.core.cst$kw$d,path], null)], null));
 
-var G__12581 = (i__12573 + (1));
-i__12573 = G__12581;
+var G__12585 = (i__12577 + (1));
+i__12577 = G__12585;
 continue;
 } else {
 return true;
@@ -133,15 +133,15 @@ return true;
 break;
 }
 })()){
-return cljs.core.chunk_cons(cljs.core.chunk(b__12574),mecca$pix$svg_paths_$_iter__12571(cljs.core.chunk_rest(s__12572__$2)));
+return cljs.core.chunk_cons(cljs.core.chunk(b__12578),mecca$pix$svg_paths_$_iter__12575(cljs.core.chunk_rest(s__12576__$2)));
 } else {
-return cljs.core.chunk_cons(cljs.core.chunk(b__12574),null);
+return cljs.core.chunk_cons(cljs.core.chunk(b__12578),null);
 }
 } else {
-var vec__12578 = cljs.core.first(s__12572__$2);
-var color = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12578,(0),null);
-var path = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12578,(1),null);
-return cljs.core.cons(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$path,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$stroke,color,cljs.core.cst$kw$d,path], null)], null),mecca$pix$svg_paths_$_iter__12571(cljs.core.rest(s__12572__$2)));
+var vec__12582 = cljs.core.first(s__12576__$2);
+var color = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12582,(0),null);
+var path = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12582,(1),null);
+return cljs.core.cons(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$path,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$stroke,color,cljs.core.cst$kw$d,path], null)], null),mecca$pix$svg_paths_$_iter__12575(cljs.core.rest(s__12576__$2)));
 }
 } else {
 return null;
@@ -158,27 +158,27 @@ return iter__4324__auto__(paths);
  * and outputs SVG in XML
  */
 mecca.pix.edn__GT_xml = (function mecca$pix$edn__GT_xml(width,height,paths){
-return ["<svg xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"crispEdges\" viewBox=\"0 -0.5 ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(width)," ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(height),"\"><g>",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,(function (){var iter__4324__auto__ = (function mecca$pix$edn__GT_xml_$_iter__12582(s__12583){
+return ["<svg xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"crispEdges\" viewBox=\"0 -0.5 ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(width)," ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(height),"\"><g>",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,(function (){var iter__4324__auto__ = (function mecca$pix$edn__GT_xml_$_iter__12586(s__12587){
 return (new cljs.core.LazySeq(null,(function (){
-var s__12583__$1 = s__12583;
+var s__12587__$1 = s__12587;
 while(true){
-var temp__5457__auto__ = cljs.core.seq(s__12583__$1);
+var temp__5457__auto__ = cljs.core.seq(s__12587__$1);
 if(temp__5457__auto__){
-var s__12583__$2 = temp__5457__auto__;
-if(cljs.core.chunked_seq_QMARK_(s__12583__$2)){
-var c__4322__auto__ = cljs.core.chunk_first(s__12583__$2);
+var s__12587__$2 = temp__5457__auto__;
+if(cljs.core.chunked_seq_QMARK_(s__12587__$2)){
+var c__4322__auto__ = cljs.core.chunk_first(s__12587__$2);
 var size__4323__auto__ = cljs.core.count(c__4322__auto__);
-var b__12585 = cljs.core.chunk_buffer(size__4323__auto__);
-if((function (){var i__12584 = (0);
+var b__12589 = cljs.core.chunk_buffer(size__4323__auto__);
+if((function (){var i__12588 = (0);
 while(true){
-if((i__12584 < size__4323__auto__)){
-var vec__12586 = cljs.core._nth.cljs$core$IFn$_invoke$arity$2(c__4322__auto__,i__12584);
-var color = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12586,(0),null);
-var path = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12586,(1),null);
-cljs.core.chunk_append(b__12585,["<path stroke=\"",cljs.core.str.cljs$core$IFn$_invoke$arity$1(color),"\" ","d=\"",cljs.core.str.cljs$core$IFn$_invoke$arity$1(path),"\"></path>\n"].join(''));
+if((i__12588 < size__4323__auto__)){
+var vec__12590 = cljs.core._nth.cljs$core$IFn$_invoke$arity$2(c__4322__auto__,i__12588);
+var color = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12590,(0),null);
+var path = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12590,(1),null);
+cljs.core.chunk_append(b__12589,["<path stroke=\"",cljs.core.str.cljs$core$IFn$_invoke$arity$1(color),"\" ","d=\"",cljs.core.str.cljs$core$IFn$_invoke$arity$1(path),"\"></path>\n"].join(''));
 
-var G__12592 = (i__12584 + (1));
-i__12584 = G__12592;
+var G__12596 = (i__12588 + (1));
+i__12588 = G__12596;
 continue;
 } else {
 return true;
@@ -186,15 +186,15 @@ return true;
 break;
 }
 })()){
-return cljs.core.chunk_cons(cljs.core.chunk(b__12585),mecca$pix$edn__GT_xml_$_iter__12582(cljs.core.chunk_rest(s__12583__$2)));
+return cljs.core.chunk_cons(cljs.core.chunk(b__12589),mecca$pix$edn__GT_xml_$_iter__12586(cljs.core.chunk_rest(s__12587__$2)));
 } else {
-return cljs.core.chunk_cons(cljs.core.chunk(b__12585),null);
+return cljs.core.chunk_cons(cljs.core.chunk(b__12589),null);
 }
 } else {
-var vec__12589 = cljs.core.first(s__12583__$2);
-var color = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12589,(0),null);
-var path = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12589,(1),null);
-return cljs.core.cons(["<path stroke=\"",cljs.core.str.cljs$core$IFn$_invoke$arity$1(color),"\" ","d=\"",cljs.core.str.cljs$core$IFn$_invoke$arity$1(path),"\"></path>\n"].join(''),mecca$pix$edn__GT_xml_$_iter__12582(cljs.core.rest(s__12583__$2)));
+var vec__12593 = cljs.core.first(s__12587__$2);
+var color = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12593,(0),null);
+var path = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12593,(1),null);
+return cljs.core.cons(["<path stroke=\"",cljs.core.str.cljs$core$IFn$_invoke$arity$1(color),"\" ","d=\"",cljs.core.str.cljs$core$IFn$_invoke$arity$1(path),"\"></path>\n"].join(''),mecca$pix$edn__GT_xml_$_iter__12586(cljs.core.rest(s__12587__$2)));
 }
 } else {
 return null;
@@ -210,34 +210,34 @@ mecca.pix.make_path_data = (function mecca$pix$make_path_data(x,y,w){
 return ["M",cljs.core.str.cljs$core$IFn$_invoke$arity$1(x)," ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(y),"h",cljs.core.str.cljs$core$IFn$_invoke$arity$1(w)].join('');
 });
 mecca.pix.svg_data = (function mecca$pix$svg_data(img){
-var iter__4324__auto__ = (function mecca$pix$svg_data_$_iter__12593(s__12594){
+var iter__4324__auto__ = (function mecca$pix$svg_data_$_iter__12597(s__12598){
 return (new cljs.core.LazySeq(null,(function (){
-var s__12594__$1 = s__12594;
+var s__12598__$1 = s__12598;
 while(true){
-var temp__5457__auto__ = cljs.core.seq(s__12594__$1);
+var temp__5457__auto__ = cljs.core.seq(s__12598__$1);
 if(temp__5457__auto__){
-var s__12594__$2 = temp__5457__auto__;
-if(cljs.core.chunked_seq_QMARK_(s__12594__$2)){
-var c__4322__auto__ = cljs.core.chunk_first(s__12594__$2);
+var s__12598__$2 = temp__5457__auto__;
+if(cljs.core.chunked_seq_QMARK_(s__12598__$2)){
+var c__4322__auto__ = cljs.core.chunk_first(s__12598__$2);
 var size__4323__auto__ = cljs.core.count(c__4322__auto__);
-var b__12596 = cljs.core.chunk_buffer(size__4323__auto__);
-if((function (){var i__12595 = (0);
+var b__12600 = cljs.core.chunk_buffer(size__4323__auto__);
+if((function (){var i__12599 = (0);
 while(true){
-if((i__12595 < size__4323__auto__)){
-var vec__12597 = cljs.core._nth.cljs$core$IFn$_invoke$arity$2(c__4322__auto__,i__12595);
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12597,(0),null);
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12597,(1),null);
-cljs.core.chunk_append(b__12596,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.apply.cljs$core$IFn$_invoke$arity$2(mecca.pix.rgba__GT_hex,k),cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,cljs.core.map.cljs$core$IFn$_invoke$arity$2(((function (i__12595,vec__12597,k,v,c__4322__auto__,size__4323__auto__,b__12596,s__12594__$2,temp__5457__auto__){
-return (function (p__12600){
-var vec__12601 = p__12600;
-var x = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12601,(0),null);
-var y = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12601,(1),null);
+if((i__12599 < size__4323__auto__)){
+var vec__12601 = cljs.core._nth.cljs$core$IFn$_invoke$arity$2(c__4322__auto__,i__12599);
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12601,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12601,(1),null);
+cljs.core.chunk_append(b__12600,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.apply.cljs$core$IFn$_invoke$arity$2(mecca.pix.rgba__GT_hex,k),cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,cljs.core.map.cljs$core$IFn$_invoke$arity$2(((function (i__12599,vec__12601,k,v,c__4322__auto__,size__4323__auto__,b__12600,s__12598__$2,temp__5457__auto__){
+return (function (p__12604){
+var vec__12605 = p__12604;
+var x = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12605,(0),null);
+var y = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12605,(1),null);
 return mecca.pix.make_path_data(x,y,(1));
-});})(i__12595,vec__12597,k,v,c__4322__auto__,size__4323__auto__,b__12596,s__12594__$2,temp__5457__auto__))
+});})(i__12599,vec__12601,k,v,c__4322__auto__,size__4323__auto__,b__12600,s__12598__$2,temp__5457__auto__))
 ,cljs.core.reverse(v)))], null));
 
-var G__12611 = (i__12595 + (1));
-i__12595 = G__12611;
+var G__12615 = (i__12599 + (1));
+i__12599 = G__12615;
 continue;
 } else {
 return true;
@@ -245,22 +245,22 @@ return true;
 break;
 }
 })()){
-return cljs.core.chunk_cons(cljs.core.chunk(b__12596),mecca$pix$svg_data_$_iter__12593(cljs.core.chunk_rest(s__12594__$2)));
+return cljs.core.chunk_cons(cljs.core.chunk(b__12600),mecca$pix$svg_data_$_iter__12597(cljs.core.chunk_rest(s__12598__$2)));
 } else {
-return cljs.core.chunk_cons(cljs.core.chunk(b__12596),null);
+return cljs.core.chunk_cons(cljs.core.chunk(b__12600),null);
 }
 } else {
-var vec__12604 = cljs.core.first(s__12594__$2);
-var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12604,(0),null);
-var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12604,(1),null);
-return cljs.core.cons(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.apply.cljs$core$IFn$_invoke$arity$2(mecca.pix.rgba__GT_hex,k),cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,cljs.core.map.cljs$core$IFn$_invoke$arity$2(((function (vec__12604,k,v,s__12594__$2,temp__5457__auto__){
-return (function (p__12607){
-var vec__12608 = p__12607;
-var x = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12608,(0),null);
-var y = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12608,(1),null);
+var vec__12608 = cljs.core.first(s__12598__$2);
+var k = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12608,(0),null);
+var v = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12608,(1),null);
+return cljs.core.cons(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.apply.cljs$core$IFn$_invoke$arity$2(mecca.pix.rgba__GT_hex,k),cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,cljs.core.map.cljs$core$IFn$_invoke$arity$2(((function (vec__12608,k,v,s__12598__$2,temp__5457__auto__){
+return (function (p__12611){
+var vec__12612 = p__12611;
+var x = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12612,(0),null);
+var y = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__12612,(1),null);
 return mecca.pix.make_path_data(x,y,(1));
-});})(vec__12604,k,v,s__12594__$2,temp__5457__auto__))
-,cljs.core.reverse(v)))], null),mecca$pix$svg_data_$_iter__12593(cljs.core.rest(s__12594__$2)));
+});})(vec__12608,k,v,s__12598__$2,temp__5457__auto__))
+,cljs.core.reverse(v)))], null),mecca$pix$svg_data_$_iter__12597(cljs.core.rest(s__12598__$2)));
 }
 } else {
 return null;
