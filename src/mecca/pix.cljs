@@ -1,5 +1,6 @@
 (ns mecca.pix
-  (:require [re-frame.core :refer [subscribe]]))
+  (:require [re-frame.core :refer [subscribe]]
+            [reagent.core :as r]))
 
 (defn component->hex
   "Takes ASCII value 0-255, returns hex byte as string"
@@ -35,12 +36,22 @@
   [el]
   (partition 4 (js->clj (.from js/Array (img->data el)))))
 
+(defonce threshold (r/atom 80))
+
+(defn input [type label value on-change]
+  [:label label
+   [:input
+    {:style     {:width 50}
+     :type      type
+     :value     value
+     :on-change on-change}]])
+
 (defn quantize [[r g b a]]
-  (if (< 325 (+ r g b))
+  (if (< @threshold (/ (+ r g b) 3))
     [255 255 255 255]
     [0 0 0 255]))
 
-(defn get-pixels 
+(defn get-pixels
   "Takes an HTMLImageElement, returns a map of
   the colors to their corresponding pixels"
   [img]
@@ -52,25 +63,20 @@
         (dissoc pixels [0 0 0 0])
         (recur (+ 4 n)
                (update pixels
-                       (quantize [(aget data n)
+                       [(aget data n)
                                   (aget data (+ n 1))
                                   (aget data (+ n 2))
-                                  (aget data (+ n 3))])
+                                  (aget data (+ n 3))]
                        #(conj % [(mod (/ n 4) w)
                                  (.floor js/Math (/ (/ n 4) w))])))))))
-(comment
-  (get-pixels @(subscribe [:img]))
-  (let [pix (map quantize (pix @(subscribe [:img])))])
-  (for [pixel (range (count pix))]
-    ())
-  
-  (partition 4
-             (js->clj (.from js/Array (img->data @(subscribe [:img])))))
-  (get-pixels @(subscribe [:img]))
-  )
 
-;; TODO: color quantization must be done *before* assembling paths -
-;; limiting color pallet will maximize color run optimization.
+(defn dominant-colors [img n]
+  (take n (reverse (sort-by :pixels (for [[color pix] (get-pixels img)]
+                                      {:color color :pixels (count pix)})))))
+
+(comment
+  (dominant-colors @(subscribe [:img]) 5)
+  )
 
 (defn compare-rgb
   "Quantifies euclidean distance in 3 dimensional color space"
@@ -79,20 +85,56 @@
                     (.pow js/Math (- g1 g2) 2)
                     (.pow js/Math (- b1 b2) 2))))
 
-(comment
-  (compare-rgb  [102 51 204 255] [102 51 153 255])
-  (compare-rgb [153 51 204 255] [153 102 153 255])
-(compare-rgb [153 102 153 255] [204 204 204 255])
-(compare-rgb [204 204 204 255]  [255 204 204 255])
-(compare-rgb [0 0 0 0]  [255 255 255 255])
-(compare-rgb [153 204 255 255]  [153 204 255 255])
-
-  )
-
 (defn closest-neighbor
   "Returns distance of nearest color to color in colors"
   [color colors]
   (second (sort (map #(compare-rgb color %) colors))))
+
+(defn closest-color [color colors]
+  (:color (first (sort-by :dist (for [dominant-color colors]
+                                  {:color dominant-color
+                                   :dist (compare-rgb color dominant-color)})))))
+
+(defn quantize-color [color n]
+  (closest-color color (map :color (dominant-colors @(subscribe [:img]) n))))
+
+(defonce n-colors (r/atom 5))
+
+(defn quantized-pixels
+  "Takes an HTMLImageElement, returns a map of
+  the colors to their corresponding pixels"
+  [img]
+  (let [data (img->data img)
+        w    (.-width img)]
+    (loop [n      0
+           pixels {}]
+      (if (>= n (.-length data))
+        (dissoc pixels [0 0 0 0])
+        (recur (+ 4 n)
+               (update pixels
+                       (quantize-color [(aget data n)
+                                        (aget data (+ n 1))
+                                        (aget data (+ n 2))
+                                        (aget data (+ n 3))]
+                                       @n-colors)
+                       #(conj % [(mod (/ n 4) w)
+                                 (.floor js/Math (/ (/ n 4) w))])))))))
+
+(comment
+  (compare-rgb  [102 51 204 255] [102 51 153 255])
+(for [[color pix] (keys (get-pixels @(subscribe [:img])))]
+  {:color color :pixels (count pix)})
+
+(:color (first (sort-by :dist (for [color (map :color (dominant-colors @(subscribe [:img]) 5))]
+                                {:color color
+                                 :dist (compare-rgb [186 232 139 255] color)}))))
+  (map #(closest-color % (map :color (dominant-colors @(subscribe [:img]) 5)))
+       (keys (get-pixels @(subscribe [:img]))))
+  
+  
+  
+  (map #(compare-rgb [151 176 231 255] %) (map :color (dominant-colors @(subscribe [:img]) 5)))
+  (closest-neighbor [151 176 231 255] (map :color (dominant-colors @(subscribe [:img]) 5))))
 
 (defn similar-colors 
   "Takes a collection of rgba vectors,
@@ -174,7 +216,7 @@
                      (reverse v)))]))
 
  (defn svg-data [img]
-   (for [[k v] (get-pixels img)]
+   (for [[k v] (quantized-pixels img)]
      [(apply rgba->hex k)
       (apply str (flatten
                   (map
