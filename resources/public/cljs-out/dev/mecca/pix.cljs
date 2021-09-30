@@ -30,6 +30,16 @@
     (.drawImage ctx img 0 0)
     (.-data (.getImageData ctx 0 0 width height))))
 
+(defn pix 
+  "Takes an HTMLImageElement, returns a seq of rgba vals."
+  [el]
+  (partition 4 (js->clj (.from js/Array (img->data el)))))
+
+(defn quantize [[r g b a]]
+  (if (< 325 (+ r g b))
+    [255 255 255 255]
+    [0 0 0 255]))
+
 (defn get-pixels 
   "Takes an HTMLImageElement, returns a map of
   the colors to their corresponding pixels"
@@ -42,12 +52,22 @@
         (dissoc pixels [0 0 0 0])
         (recur (+ 4 n)
                (update pixels
-                       [(aget data n)
-                        (aget data (+ n 1))
-                        (aget data (+ n 2))
-                        (aget data (+ n 3))]
+                       (quantize [(aget data n)
+                                  (aget data (+ n 1))
+                                  (aget data (+ n 2))
+                                  (aget data (+ n 3))])
                        #(conj % [(mod (/ n 4) w)
                                  (.floor js/Math (/ (/ n 4) w))])))))))
+(comment
+  (get-pixels @(subscribe [:img]))
+  (let [pix (map quantize (pix @(subscribe [:img])))])
+  (for [pixel (range (count pix))]
+    ())
+  
+  (partition 4
+             (js->clj (.from js/Array (img->data @(subscribe [:img])))))
+  (get-pixels @(subscribe [:img]))
+  )
 
 ;; TODO: color quantization must be done *before* assembling paths -
 ;; limiting color pallet will maximize color run optimization.
@@ -81,12 +101,21 @@
   (sort-by #(closest-neighbor % colors)
            colors))
 
-(comment
-  (keys (get-pixels @(subscribe [:img])))
-  
-  (closest-neighbor [0 0 1 255] (keys (get-pixels @(subscribe [:img]))))
 
-  (similar-colors (keys (get-pixels @(subscribe [:img])))))
+
+(comment
+  (def pix (get-pixels @(subscribe [:img])))
+
+  pix
+
+  (quantize (first pix))
+
+  (keys (get-pixels @(subscribe [:img])))
+  (take 10 (keys (get-pixels @(subscribe [:img]))))
+  (closest-neighbor [0 0 1 255] (keys (get-pixels @(subscribe [:img]))))
+  (take 10 pix)
+  (similar-colors (keys (get-pixels @(subscribe [:img]))))
+  )
 
 (defn svg-paths
   "Accepts SVG paths in the form [[color1 path1] [color2 path2] ...]
@@ -120,8 +149,58 @@
 (defn make-path-data [x y w]
   (str "M" x " " y "h" w))
 
-(defn svg-data [img]
+(def color
+  (reverse (get (get-pixels @(subscribe [:img])) [255 255 255 255])))
+
+
+
+(defn row-runs [color]
+  (for [y (distinct (map last color))]
+    (loop [pixels (map first (filter #(= y (last %)) color))
+           run-start (first pixels)
+           runs []]
+      (cond
+        (empty? pixels) runs
+        (= 1 (- (second pixels) (first pixels)))
+        (recur (rest pixels) run-start runs)
+        :else
+        (recur (rest pixels) (second pixels)
+               (conj runs [run-start y (inc (- (first pixels) run-start))]))))))
+
+#_(defn svg-data [img]
   (for [[k v] (get-pixels img)]
     [(apply rgba->hex k)
      (apply str (map (fn [[x y]] (make-path-data x y 1))
                      (reverse v)))]))
+
+ (defn svg-data [img]
+   (for [[k v] (get-pixels img)]
+     [(apply rgba->hex k)
+      (apply str (flatten
+                  (map
+                   #(map (fn [run] (apply make-path-data run)) %) (row-runs (reverse v)))))]))
+
+(comment
+  (svg-data @(subscribe [:img]))
+  
+  
+  (def row
+    (first (partition-by last color)))
+  
+  (ffirst
+   (row-runs color))
+
+  (flatten
+   (map
+    #(map (fn [run] (apply make-path-data run)) %) (row-runs color)))
+
+ (for [y (range (count (partition-by last color)))]
+   (row-runs (nth (partition-by last color) y)))
+ 
+
+  (for [[k v] (get-pixels @(subscribe [:img]))]
+    [(apply rgba->hex k)
+     (apply str (map (fn [[x y]] (make-path-data x y 1))
+                     (reverse v)))])
+  (svg-data @(subscribe [:img]))
+  )

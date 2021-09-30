@@ -2,7 +2,7 @@
   (:require
    [re-frame.core :as rf :refer [subscribe dispatch]]
    [goog.object :as o]
-   [mecca.pix :refer [get-pixels closest-neighbor similar-colors rgba->hex img->data edn->xml svg-data svg-paths]]))
+   [mecca.pix :refer [get-pixels closest-neighbor similar-colors rgba->hex img->data edn->xml svg-data svg-paths quantize]]))
 
 (defn import-image []
   [:div
@@ -103,11 +103,11 @@
      [:div
       [orig-img]
       [svg-output]
-      [scaled-image]
-      [base64]
-      [img-data]
-      [:p "Path data (EDN):"]
-      [:textarea {:rows      10
+      ;[scaled-image]
+      ;[base64]
+      ;[img-data]
+      ;[:p "Path data (EDN):"]
+      #_[:textarea {:rows      10
                   :cols      48
                   :value     (str (svg-data @(subscribe [:img])))
                   :read-only true}]

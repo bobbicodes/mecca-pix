@@ -149,18 +149,23 @@
 (defn make-path-data [x y w]
   (str "M" x " " y "h" w))
 
- (defn row-runs [color]
-   (for [y (range (count (partition-by last color)))]
-     (loop [pixels (map first (nth (partition-by last color) y))
-            run-start (first pixels)
-            runs []]
-       (cond
-         (empty? pixels) runs
-         (= 1 (- (second pixels) (first pixels)))
-         (recur (rest pixels) run-start runs)
-         :else
-         (recur (rest pixels) (second pixels)
-                (conj runs [run-start y (inc (- (first pixels) run-start))]))))))
+(def color
+  (reverse (get (get-pixels @(subscribe [:img])) [255 255 255 255])))
+
+
+
+(defn row-runs [color]
+  (for [y (distinct (map last color))]
+    (loop [pixels (map first (filter #(= y (last %)) color))
+           run-start (first pixels)
+           runs []]
+      (cond
+        (empty? pixels) runs
+        (= 1 (- (second pixels) (first pixels)))
+        (recur (rest pixels) run-start runs)
+        :else
+        (recur (rest pixels) (second pixels)
+               (conj runs [run-start y (inc (- (first pixels) run-start))]))))))
 
 #_(defn svg-data [img]
   (for [[k v] (get-pixels img)]
@@ -178,8 +183,7 @@
 (comment
   (svg-data @(subscribe [:img]))
   
-  (def color
-    (reverse (get (get-pixels @(subscribe [:img])) [255 255 255 255])))
+  
   (def row
     (first (partition-by last color)))
   
