@@ -34,19 +34,19 @@
 (defn pix 
   "Takes an HTMLImageElement, returns a seq of rgba vals."
   [el]
-  (partition 4 (js->clj (.from js/Array (img->data el)))))
+  (vec (partition 4 (js->clj (.from js/Array (img->data el))))))
 
 (defonce threshold (r/atom 80))
 
 (defn input [type label value on-change]
   [:label label
    [:input
-    {:style     {:width 50}
+    {:style     {:width 40}
      :type      type
      :value     value
      :on-change on-change}]])
 
-(defn quantize [[r g b a]]
+(defn quantize-bw [[r g b a]]
   (if (< @threshold (/ (+ r g b) 3))
     [255 255 255 255]
     [0 0 0 255]))
@@ -70,12 +70,9 @@
                        #(conj % [(mod (/ n 4) w)
                                  (.floor js/Math (/ (/ n 4) w))])))))))
 
-(defn dominant-colors [img n]
-  (take n (reverse (sort-by :pixels (for [[color pix] (get-pixels img)]
-                                      {:color color :pixels (count pix)})))))
-
 (comment
-  (dominant-colors @(subscribe [:img]) 5)
+  @(subscribe [:colors])
+  @(subscribe [:pix])
   )
 
 (defn compare-rgb
@@ -96,7 +93,7 @@
                                    :dist (compare-rgb color dominant-color)})))))
 
 (defn quantize-color [color n]
-  (closest-color color (map :color (dominant-colors @(subscribe [:img]) n))))
+  (closest-color color (map :color (take n @(subscribe [:colors])))))
 
 (defonce n-colors (r/atom 5))
 
@@ -121,20 +118,8 @@
                                  (.floor js/Math (/ (/ n 4) w))])))))))
 
 (comment
-  (compare-rgb  [102 51 204 255] [102 51 153 255])
-(for [[color pix] (keys (get-pixels @(subscribe [:img])))]
-  {:color color :pixels (count pix)})
 
-(:color (first (sort-by :dist (for [color (map :color (dominant-colors @(subscribe [:img]) 5))]
-                                {:color color
-                                 :dist (compare-rgb [186 232 139 255] color)}))))
-  (map #(closest-color % (map :color (dominant-colors @(subscribe [:img]) 5)))
-       (keys (get-pixels @(subscribe [:img]))))
-  
-  
-  
-  (map #(compare-rgb [151 176 231 255] %) (map :color (dominant-colors @(subscribe [:img]) 5)))
-  (closest-neighbor [151 176 231 255] (map :color (dominant-colors @(subscribe [:img]) 5))))
+  )
 
 (defn similar-colors 
   "Takes a collection of rgba vectors,
@@ -144,19 +129,7 @@
            colors))
 
 
-
 (comment
-  (def pix (get-pixels @(subscribe [:img])))
-
-  pix
-
-  (quantize (first pix))
-
-  (keys (get-pixels @(subscribe [:img])))
-  (take 10 (keys (get-pixels @(subscribe [:img]))))
-  (closest-neighbor [0 0 1 255] (keys (get-pixels @(subscribe [:img]))))
-  (take 10 pix)
-  (similar-colors (keys (get-pixels @(subscribe [:img]))))
   )
 
 (defn svg-paths
@@ -180,21 +153,10 @@
 
 (comment
 
-  (partition-by last   '([0 0] [1 0] [2 0] [3 0] [4 0] [5 0] [6 0] [10 0] [11 0] [12 0] [13 0] [14 0] [15 0] [16 0] [0 1] [1 1] [2 1] [3 1] [4 1] [12 1] [13 1] [14 1] [15 1] [16 1]))
-
-  '([0 0] [10 0] [11 0] [16 0] [0 1] [4 1] [12 1] [16 1])
-
-  "M0 0h1M1 0h1M2 0h1M3 0h1M4 0h1M5 0h1M6 0h1M10 0h1M11 0h1M12 0h1M13 0h1M14 0h1M15 0h1M16 0h1M0 1h1M1 1h1M2 1h1M3 1h1M4 1h1M12 1h1M13 1h1M14 1h1M15 1h1M16 1h1M0 2h1M1 2h1M2 2h1M3 2h1M13 2h1M14 2h1M15 2h1M16 2h1M0 3h1M1 3h1M2 3h1M14 3h1M15 3h1M16 3h1M0 4h1M1 4h1M15 4h1M16 4h1M0 5h1M1 5h1M15 5h1M16 5h1M0 6h1M1 6h1M2 6h1M14 6h1M15 6h1M16 6h1M0 7h1M1 7h1M2 7h1M3 7h1M13 7h1M14 7h1M15 7h1M16 7h1M0 8h1M1 8h1M2 8h1M3 8h1M4 8h1M12 8h1M13 8h1M14 8h1M15 8h1M16 8h1M0 9h1M1 9h1M2 9h1M14 9h1M15 9h1M16 9h1M0 10h1M1 10h1M15 10h1M16 10h1M0 11h1M16 11h1M0 15h1M16 15h1M0 16h1M1 16h1M15 16h1M16 16h1M0 17h1M1 17h1M15 17h1M16 17h1M0 18h1M16 18h1M0 22h1M16 22h1"
-
-  "M0 0h7M10 0h7M0 1h5M12 1h5M0 2h4M13 2h4M0 3h3M14 3h3M0 4h2M15 4h2M0 5h2M15 5h2M0 6h3M14 6h3M0 7h4M13 7h4M0 8h5M12 8h5M0 9h3M14 9h3M0 10h2M15 10h2M0 11h1M16 11h1M0 15h1M16 15h1M0 16h2M15 16h2M0 17h2M15 17h2M0 18h1M16 18h1M0 22h1M16 22h1")
+  )
 
 (defn make-path-data [x y w]
   (str "M" x " " y "h" w))
-
-(def color
-  (reverse (get (get-pixels @(subscribe [:img])) [255 255 255 255])))
-
-
 
 (defn row-runs [color]
   (for [y (distinct (map last color))]
@@ -223,26 +185,5 @@
                    #(map (fn [run] (apply make-path-data run)) %) (row-runs (reverse v)))))]))
 
 (comment
-  (svg-data @(subscribe [:img]))
-  
-  
-  (def row
-    (first (partition-by last color)))
-  
-  (ffirst
-   (row-runs color))
 
-  (flatten
-   (map
-    #(map (fn [run] (apply make-path-data run)) %) (row-runs color)))
-
- (for [y (range (count (partition-by last color)))]
-   (row-runs (nth (partition-by last color) y)))
- 
-
-  (for [[k v] (get-pixels @(subscribe [:img]))]
-    [(apply rgba->hex k)
-     (apply str (map (fn [[x y]] (make-path-data x y 1))
-                     (reverse v)))])
-  (svg-data @(subscribe [:img]))
   )
