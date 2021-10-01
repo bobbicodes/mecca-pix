@@ -95,24 +95,30 @@
                     :value     (str (reverse (get pixels color)))
                     :read-only true}]]))])
 
+(defn button [label onclick]
+  [:button
+   {:on-click onclick}
+   label])
+
 (defn mecca []
   [:div
    [import-image]
    (when @(subscribe [:img])
      [:div
       [orig-img]
-      [input "number" "Threshold: " @threshold #(reset! threshold (-> % .-target .-value js/parseInt))]
+      ;[input "number" "Threshold: " @threshold #(reset! threshold (-> % .-target .-value js/parseInt))]
       [input "number" "Colors: " @n-colors #(reset! n-colors (-> % .-target .-value js/parseInt))]
       [svg-output]
       ;[scaled-image]
       ;[base64]
       ;[img-data]
-      ;[:p "Path data (EDN):"]
-      #_[:textarea {:rows      10
+      [:p "Path data (EDN):"]
+      [:textarea {:rows      10
                   :cols      48
-                  :value     (str (svg-data @(subscribe [:img])))
+                  :value     (str (vec (svg-data @(subscribe [:img]))))
                   :read-only true}]
-     [color-pix]])])
+     ;[color-pix]
+      ])])
 
 (comment
   
