@@ -2,11 +2,11 @@
   (:require
    [re-frame.core :as rf :refer [subscribe dispatch]]
    [goog.object :as o]
-   [mecca.pix :refer [get-pixels closest-neighbor similar-colors rgba->hex img->data edn->xml svg-data svg-paths]]))
+   [mecca.pix :refer [get-pixels closest-neighbor similar-colors rgba->hex img->data edn->xml svg-data svg-paths threshold n-colors input]]))
 
 (defn import-image []
   [:div
-   [:h1 "Import pixel art"]
+   [:h1 "Import image"]
    [:input#input
     {:type      "file"
      :on-change 
@@ -21,7 +21,7 @@
                            (-> % .-target .-result)]))))}]
    (when (and (not @(subscribe [:img]))
               @(subscribe [:loading?]))
-     [:p.fade "Loading..."])])
+     [:p.fade "Processing..."])])
 
 (defn scaled-image []
   [:div
@@ -43,15 +43,14 @@
   (let [file (subscribe [:base64])]
     (fn []
       [:div
-       [:p "Original image:"]
+       [:p (str "Original image: " (.-width @(subscribe [:img])) " x "
+                (.-height @(subscribe [:img])))]
        [:img {:src   @file}]])))
 
 (defn svg-output []
   (let [img (subscribe [:img])]
     (fn []
       [:div
-       [:p (str  "Width: " (.-width @img))]
-       [:p (str  "Height: " (.-height @img))]
        [:p "SVG:"]
        [:svg#converted 
         {:xmlns           "http://www.w3.org/2000/svg"
@@ -96,22 +95,30 @@
                     :value     (str (reverse (get pixels color)))
                     :read-only true}]]))])
 
+(defn button [label onclick]
+  [:button
+   {:on-click onclick}
+   label])
+
 (defn mecca []
   [:div
    [import-image]
    (when @(subscribe [:img])
      [:div
       [orig-img]
+      ;[input "number" "Threshold: " @threshold #(reset! threshold (-> % .-target .-value js/parseInt))]
+      [input "number" "Colors: " @n-colors #(reset! n-colors (-> % .-target .-value js/parseInt))]
       [svg-output]
-      [scaled-image]
-      [base64]
-      [img-data]
+      ;[scaled-image]
+      ;[base64]
+      ;[img-data]
       [:p "Path data (EDN):"]
       [:textarea {:rows      10
                   :cols      48
-                  :value     (str (svg-data @(subscribe [:img])))
+                  :value     (str (vec (svg-data @(subscribe [:img]))))
                   :read-only true}]
-     [color-pix]])])
+     ;[color-pix]
+      ])])
 
 (comment
   
