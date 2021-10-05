@@ -36,12 +36,16 @@
   [el]
   (vec (partition 4 (js->clj (.from js/Array (img->data el))))))
 
+(comment
+  (pix @(subscribe [:img]))
+  )
+
 (defonce threshold (r/atom 80))
 
 (defn input [type label value on-change]
   [:label label
    [:input
-    {:style     {:width 40}
+    {:style     {:width 50}
      :type      type
      :value     value
      :on-change on-change}]])
@@ -95,9 +99,10 @@
 (defn quantize-color [color n]
   (closest-color color (map :color (take n @(subscribe [:colors])))))
 
-(defonce n-colors (r/atom 5))
+(defonce n-colors (r/atom 5000))
+(defonce progress (r/atom 0))
 
-(defn quantized-pixels
+(defn q-pixels
   "Takes an HTMLImageElement, returns a map of
   the colors to their corresponding pixels"
   [img]
@@ -105,20 +110,24 @@
         w    (.-width img)]
     (loop [n      0
            pixels {}]
-      (if (>= n (.-length data))
-        (dissoc pixels [0 0 0 0])
-        (recur (+ 4 n)
-               (update pixels
-                       (quantize-color [(aget data n)
-                                        (aget data (+ n 1))
-                                        (aget data (+ n 2))
-                                        (aget data (+ n 3))]
-                                       @n-colors)
-                       #(conj % [(mod (/ n 4) w)
-                                 (.floor js/Math (/ (/ n 4) w))])))))))
+      (do (reset! progress n)
+        (if (>= n (.-length data))
+          (dissoc pixels [0 0 0 0])
+          (recur (+ 4 n)
+                 (update pixels
+                         (quantize-color [(aget data n)
+                                          (aget data (+ n 1))
+                                          (aget data (+ n 2))
+                                          (aget data (+ n 3))]
+                                         @n-colors)
+                         #(conj % [(mod (/ n 4) w)
+                                   (.floor js/Math (/ (/ n 4) w))]))))))))
+
+(def quantized-pixels (memoize q-pixels))
 
 (comment
-
+  (mapcat #(quantize-color % 200) (pix @(subscribe [:img])))
+(.from js/Uint8ClampedArray (clj->js (mapcat #(quantize-color % 200) (pix @(subscribe [:img])))))
   )
 
 (defn similar-colors 
@@ -127,7 +136,6 @@
   [colors]
   (sort-by #(closest-neighbor % colors)
            colors))
-
 
 (comment
   )
@@ -138,8 +146,10 @@
   [paths]
   (into [:g]
         (for [[color path] paths]
-          [:path {:stroke color
-                  :d      path}])))
+          (do
+            (reset! progress color)
+            [:path {:stroke color
+                    :d      path}]))))
 
 (defn edn->xml 
   "Accepts SVG paths in the form [[color1 path1] [color2 path2] ...]
@@ -158,18 +168,22 @@
 (defn make-path-data [x y w]
   (str "M" x " " y "h" w))
 
-(defn row-runs [color]
+(defn runs [color]
   (for [y (distinct (map last color))]
     (loop [pixels (map first (filter #(= y (last %)) color))
            run-start (first pixels)
            runs []]
-      (cond
-        (empty? pixels) runs
-        (= 1 (- (second pixels) (first pixels)))
-        (recur (rest pixels) run-start runs)
-        :else
-        (recur (rest pixels) (second pixels)
-               (conj runs [run-start y (inc (- (first pixels) run-start))]))))))
+      (do
+        (reset! progress y)
+        (cond
+          (empty? pixels) runs
+          (= 1 (- (second pixels) (first pixels)))
+          (recur (rest pixels) run-start runs)
+          :else
+          (recur (rest pixels) (second pixels)
+                 (conj runs [run-start y (inc (- (first pixels) run-start))])))))))
+
+(def row-runs (memoize runs))
 
 #_(defn svg-data [img]
   (for [[k v] (get-pixels img)]
@@ -185,5 +199,7 @@
                    #(map (fn [run] (apply make-path-data run)) %) (row-runs (reverse v)))))]))
 
 (comment
-
+  @(subscribe [:colors])
+  @(subscribe [:pix-qt])
+  (svg-data "nno")
   )
