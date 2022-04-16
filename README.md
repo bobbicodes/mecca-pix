@@ -4,7 +4,7 @@ This thing came about because of my deep frustration with every SVG tool I could
 
 Intended for small, low-res images with limited colors. Output is rendered pixel for vector "pixel", a `path` with a `stroke` with a length and width of `1`.  To optimize, run through [SVGOMG](https://jakearchibald.github.io/svgomg/) or the like.
 
-[Live app here](https://porkostomus.github.io/mecca-pix/)
+[Live app here](https://BTowersCoding.github.io/mecca-pix/)
 
 ## Development
 
